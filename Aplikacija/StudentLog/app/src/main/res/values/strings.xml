@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StudentLog</string>
+
+        <string-array name="spinnerItems">
+            <item>Student</item>
+            <item>Profesor</item>
+        </string-array>
+
 </resources>

@@ -9,6 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
+        android:text="Oib"
+        android:ems="10"
+        android:id="@+id/txtoib" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
         android:text="Ime"
         android:ems="10"
         android:id="@+id/txtIme" />
@@ -40,7 +48,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
-        android:layout_weight="0.09" />
+        android:layout_weight="0.09"
+        android:entries="@array/spinnerItems"
+        />
 
     <Button
         android:text="registracija"

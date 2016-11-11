@@ -3,28 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Korisničko ime"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="112dp"
-        android:id="@+id/username_editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:layout_below="@+id/username_editText"
-        android:layout_alignEnd="@+id/username_editText"
-        android:layout_marginTop="47dp"
-        android:id="@+id/password_editText"
-        android:text="Lozinka" />
-
     <Button
         android:text="registracija"
         android:layout_width="wrap_content"
@@ -38,7 +16,7 @@
         android:text="Prijava"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/login_button"
+        android:id="@+id/btnPrijava"
         android:layout_above="@+id/registration_button"
         android:layout_marginBottom="13dp"
         android:layout_alignEnd="@+id/registration_button"
@@ -50,19 +28,20 @@
         android:inputType="textPersonName"
         android:text="Korisničko ime"
         android:ems="10"
-        android:layout_above="@+id/password_editText"
-        android:layout_alignStart="@+id/username_editText"
-        android:layout_marginBottom="41dp"
-        android:id="@+id/username_label" />
+        android:layout_marginTop="113dp"
+        android:id="@+id/txtKorIme"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Lozinka"
+        android:inputType="textPassword"
         android:ems="10"
-        android:layout_below="@+id/username_editText"
-        android:layout_alignStart="@+id/password_editText"
-        android:id="@+id/label_password" />
+        android:layout_marginTop="48dp"
+        android:id="@+id/txtLozinka"
+        android:text="Lozinka"
+        android:layout_below="@+id/txtKorIme"
+        android:layout_alignStart="@+id/txtKorIme" />
 
 </RelativeLayout>
