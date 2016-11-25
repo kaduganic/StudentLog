@@ -43,7 +43,8 @@ public class Registracija extends AppCompatActivity {
         registracija.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Osoba osoba=new Osoba();
+                Osoba osoba = new Osoba();
+                Boolean regisOk = true;
 
                 if(oib.getText() != null){
                     try {
@@ -51,31 +52,36 @@ public class Registracija extends AppCompatActivity {
                     } catch(NumberFormatException nfe) {
                         Toast.makeText(context, "OIB moraju biti brojevi",
                                 Toast.LENGTH_LONG).show();
+                                regisOk = false;
                     }
                 }else{
                     Toast.makeText(context, "OIB je prazno polje",
                             Toast.LENGTH_LONG).show();
+                            regisOk = false;
                 }//oib
 
-                if(ime.getText() != null){
+                if(!ime.getText().equals("")){
                         osoba.ime =ime.getText().toString();
                 }else{
                     Toast.makeText(context, "Ime je prazno polje",
                             Toast.LENGTH_LONG).show();
+                            regisOk = false;
                 }//ime
 
-                if(prezime.getText() != null){
+                if(!prezime.getText().equals("")){
                     osoba.prezime =prezime.getText().toString();
                 }else{
                     Toast.makeText(context, "Prezime je prazno polje",
                             Toast.LENGTH_LONG).show();
+                            regisOk = false;
                 }//prezime
 
-                if(korime.getText() != null){
+                if(!korime.getText().equals("")){
                     osoba.korime =korime.getText().toString();
                 }else{
                     Toast.makeText(context, "Korisnicko ime je prazno polje",
                             Toast.LENGTH_LONG).show();
+                            regisOk = false;
                 }//korisnicko ime
 
                 if(uloga.getSelectedItem() != null){
@@ -83,21 +89,32 @@ public class Registracija extends AppCompatActivity {
                 }else{
                     Toast.makeText(context, "Uloga je prazno polje",
                             Toast.LENGTH_LONG).show();
+                            regisOk = false;
                 }//uloga
 
-                if(lozinka.getText() != null){
+                if(!lozinka.getText().equals("")){
                     osoba.lozinka =lozinka.getText().toString();
                 }else{
                     Toast.makeText(context, "Lozinka je prazno polje",
                             Toast.LENGTH_LONG).show();
+                            regisOk = false;
                 }//lozinka
-               PreferenceManagerHelper.spremiOsoba(osoba.oib,osoba.ime,osoba.prezime,osoba.korime,osoba.lozinka,osoba.uloga,context);
+                if(regisOk){
+                    PreferenceManagerHelper.spremiOsoba(osoba.oib,osoba.ime,osoba.prezime,osoba.korime,osoba.lozinka,osoba.uloga,context);
+                    closeRegOpenPrij();
+                }
+
             }
         });
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        closeRegOpenPrij();
+    }
+
+
+    private void closeRegOpenPrij(){
         Context contex = getApplicationContext();
         Intent intent = new Intent(contex, Prijava.class);
         startActivity(intent);

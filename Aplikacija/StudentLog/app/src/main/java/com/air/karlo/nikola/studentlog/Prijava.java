@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.RippleDrawable;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.example.core.PreferenceManagerHelper;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 
 public class Prijava extends AppCompatActivity {
@@ -35,8 +38,15 @@ public class Prijava extends AppCompatActivity {
         Button registracija = (Button) findViewById(R.id.registration_button);
         Button prijava = (Button) findViewById(R.id.btnPrijava);
 
-        final String korIme = PreferenceManagerHelper.getKorime(context);
-        final String sharedLozinka = PreferenceManagerHelper.getLozinka(context);
+        Osoba osob = new Osoba();
+        final ArrayList<Osoba> osobe = new ArrayList<>();
+
+        osob.ime = PreferenceManagerHelper.getIme(context);
+        osob.prezime = PreferenceManagerHelper.getPrezime(context);
+        osob.korime = PreferenceManagerHelper.getKorime(context);
+        osob.lozinka = PreferenceManagerHelper.getLozinka(context);
+        osob.uloga = PreferenceManagerHelper.getUloga(context);
+        osobe.add(osob);
 
         registracija.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +59,19 @@ public class Prijava extends AppCompatActivity {
         prijava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, Meni.class);
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
 
-                if(korIme.equals(kIme)  && sharedLozinka.equals(loz)){
-                    Toast.makeText(context, "Korisnik postoji!",
-                            Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(context, "Korisnik ne postoji!",
-                            Toast.LENGTH_LONG).show();
+                for (Osoba os:osobe) {
+                    if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){
+                                Toast.makeText(context, "Korisnik postoji!",Toast.LENGTH_LONG).show();//ukloniti
+                                intent.putExtra("osoba", os);
+                                startActivity(intent);
+                                finish();
+                    }else{
+                        Toast.makeText(context, "Korisnik ne postoji!",Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }

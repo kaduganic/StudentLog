@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/txtKorisnik"
+         />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:text="Glavni izbornik"
+        android:ems="10"
+        android:id="@+id/txtGlavniIzbor"
+        android:layout_above="@+id/btnKolegij"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDolasci"
+        android:layout_above="@+id/btnQRkod"
+        android:layout_alignStart="@+id/btnPregledKolegija"
+        android:layout_marginBottom="27dp" />
+
+    <TableLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="509dp">
+
+        <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnQRkod"
+            android:layout_marginBottom="69dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/btnDolasci" />
+
+        <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnKolegij"
+            android:layout_marginBottom="55dp"
+            android:layout_above="@+id/btnPregledKolegija"
+            android:layout_alignStart="@+id/txtGlavniIzbor" />
+
+        <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnPregledKolegija"
+            android:layout_marginBottom="52dp"
+            android:layout_above="@+id/btnDolasci"
+            android:layout_alignStart="@+id/btnKolegij" />
+
+    </TableLayout>
+
+    <TextView
+        android:text="Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+</LinearLayout>
