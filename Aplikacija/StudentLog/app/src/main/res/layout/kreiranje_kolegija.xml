@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    style="@style/main_app_theme">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtImePrezime"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Kreiranje kolegija"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:id="@+id/txtKreiranjeKolegija"
+        android:layout_weight="0.02"
+        android:textAlignment="center"
+        android:textSize="36sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="Naziv kolegija"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtNaziv"
+        android:layout_weight="0.03" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Broj ects bodova"
+        android:ems="10"
+        android:id="@+id/txtEcts"
+        android:layout_weight="0.03" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.60">
+
+        <Button
+            android:text="Spremi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btnSpremi" />
+    </RelativeLayout>
+</LinearLayout>

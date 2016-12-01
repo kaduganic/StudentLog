@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/main_app_theme">
 
     <Button
         android:text="registracija"
@@ -26,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Korisničko ime"
+        android:hint="Korisnicko ime"
         android:ems="10"
         android:layout_marginTop="113dp"
         android:id="@+id/txtKorIme"
@@ -40,7 +41,7 @@
         android:ems="10"
         android:layout_marginTop="48dp"
         android:id="@+id/txtLozinka"
-        android:text="Lozinka"
+        android:hint="Lozinka"
         android:layout_below="@+id/txtKorIme"
         android:layout_alignStart="@+id/txtKorIme" />
 

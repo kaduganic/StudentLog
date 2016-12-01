@@ -9,7 +9,7 @@ public class PreferenceManagerHelper {
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putInt("oib", oib)
-                .putString("Ime", ime)
+                .putString("ime", ime)
                 .putString("prezime", prezime)
                 .putString("korime", korime)
                 .putString("lozinka", lozinka)

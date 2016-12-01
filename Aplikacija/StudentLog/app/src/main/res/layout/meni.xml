@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/main_app_theme">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/txtKorisnik"
-         />
+    <TextView
+        android:text="TextView"
+        android:layout_width="360dp"
+        android:layout_height="47dp"
+        android:id="@+id/txtKorisnik" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:inputType="textPersonName"
+    <TextView
         android:text="Glavni izbornik"
-        android:ems="10"
-        android:id="@+id/txtGlavniIzbor"
-        android:layout_above="@+id/btnKolegij"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="58dp" />
-
-    <Button
-        android:text="Button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDolasci"
-        android:layout_above="@+id/btnQRkod"
-        android:layout_alignStart="@+id/btnPregledKolegija"
-        android:layout_marginBottom="27dp" />
+        android:layout_height="77dp"
+        android:id="@+id/txtGlavniIzbornik"
+        android:textSize="36sp"
+        android:textAlignment="center" />
 
-    <TableLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="509dp">
+        android:layout_height="50dp">
 
         <Button
             android:text="Button"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnQRkod"
-            android:layout_marginBottom="69dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/btnDolasci" />
-
-        <Button
-            android:text="Button"
-            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/btnKolegij"
-            android:layout_marginBottom="55dp"
-            android:layout_above="@+id/btnPregledKolegija"
-            android:layout_alignStart="@+id/txtGlavniIzbor" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
         <Button
             android:text="Button"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/btnPregledKolegija"
-            android:layout_marginBottom="52dp"
-            android:layout_above="@+id/btnDolasci"
-            android:layout_alignStart="@+id/btnKolegij" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
-    </TableLayout>
+    </RelativeLayout>
 
-    <TextView
-        android:text="Name"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+        android:layout_height="50dp">
+
+        <Button
+            android:text="Button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDolasci"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:text="Button"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnQRkod"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp" />
+    </RelativeLayout>
+
 </LinearLayout>

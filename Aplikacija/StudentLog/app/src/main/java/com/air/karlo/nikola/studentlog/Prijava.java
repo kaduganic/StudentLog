@@ -37,16 +37,8 @@ public class Prijava extends AppCompatActivity {
         final Context context = getApplicationContext();
         Button registracija = (Button) findViewById(R.id.registration_button);
         Button prijava = (Button) findViewById(R.id.btnPrijava);
-
-        Osoba osob = new Osoba();
+        final Osoba osob = new Osoba();
         final ArrayList<Osoba> osobe = new ArrayList<>();
-
-        osob.ime = PreferenceManagerHelper.getIme(context);
-        osob.prezime = PreferenceManagerHelper.getPrezime(context);
-        osob.korime = PreferenceManagerHelper.getKorime(context);
-        osob.lozinka = PreferenceManagerHelper.getLozinka(context);
-        osob.uloga = PreferenceManagerHelper.getUloga(context);
-        osobe.add(osob);
 
         registracija.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +52,17 @@ public class Prijava extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Meni.class);
+                osob.ime = PreferenceManagerHelper.getIme(context);
+                osob.prezime = PreferenceManagerHelper.getPrezime(context);
+                osob.korime = PreferenceManagerHelper.getKorime(context);
+                osob.lozinka = PreferenceManagerHelper.getLozinka(context);
+                osob.uloga = PreferenceManagerHelper.getUloga(context);
+                osobe.add(osob);
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
 
                 for (Osoba os:osobe) {
                     if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){
-                                Toast.makeText(context, "Korisnik postoji!",Toast.LENGTH_LONG).show();//ukloniti
                                 intent.putExtra("osoba", os);
                                 startActivity(intent);
                                 finish();
