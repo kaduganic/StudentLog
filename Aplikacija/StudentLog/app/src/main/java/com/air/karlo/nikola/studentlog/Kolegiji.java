@@ -11,4 +11,10 @@ public class Kolegiji {
     int id;
     String naziv;
     int ects;
+
+    public Kolegiji(int i, String n, int e) {
+        id = i;
+        naziv = n;
+        ects = e;
+    }
 }

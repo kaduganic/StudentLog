@@ -66,8 +66,11 @@ public class Meni extends AppCompatActivity {
         btnPregKol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, PregledKolegija.class);
                 if(osoba.uloga.equals("Profesor")){
-                    //pregled kolegija
+                    intent.putExtra("osoba", osoba);
+                    startActivity(intent);
+                    finish();
                 }else if(osoba.uloga.equals("Student")){
                     //pregled kolegija
                 }
