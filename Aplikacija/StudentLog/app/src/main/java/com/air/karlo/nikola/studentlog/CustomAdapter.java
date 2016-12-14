@@ -24,14 +24,16 @@ class CustomAdapter extends ArrayAdapter<Kolegiji> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Kolegiji singleKolegij = getItem(position);
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_adapter_kolegij, parent, false);
 
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_adapter_kolegij, parent, false);
+        }
 
-        TextView nazivKolegija = (TextView) convertView.findViewById(R.id.txtNaziv);
-        TextView ects = (TextView) convertView.findViewById(R.id.txtEcts);
+        TextView nazivKolegija = (TextView) convertView.findViewById(R.id.txtNazivAdapter);
+        TextView ects = (TextView) convertView.findViewById(R.id.txtEctsAdapter);
 
         nazivKolegija.setText(singleKolegij.naziv);
-        ects.setText(singleKolegij.ects);
+        ects.setText(singleKolegij.ects + " ectsa");
 
         return convertView;
     }
