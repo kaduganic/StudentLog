@@ -11,10 +11,12 @@ public class Kolegiji {
     int id;
     String naziv;
     int ects;
+    int idNositelj;
 
-    public Kolegiji(int i, String n, int e) {
+    public Kolegiji(int i, String n, int e, int idNos) {
         id = i;
         naziv = n;
         ects = e;
+        idNositelj = idNos;
     }
 }

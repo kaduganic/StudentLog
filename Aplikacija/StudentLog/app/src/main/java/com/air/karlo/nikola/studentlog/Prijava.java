@@ -14,10 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.core.PreferenceManagerHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Prijava extends AppCompatActivity {
@@ -52,12 +56,9 @@ public class Prijava extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Meni.class);
-                osob.ime = PreferenceManagerHelper.getIme(context);
-                osob.prezime = PreferenceManagerHelper.getPrezime(context);
-                osob.korime = PreferenceManagerHelper.getKorime(context);
-                osob.lozinka = PreferenceManagerHelper.getLozinka(context);
-                osob.uloga = PreferenceManagerHelper.getUloga(context);
-                osobe.add(osob);
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Osoba>>(){}.getType();
+                List<Osoba> osobe = gson.fromJson(PreferenceManagerHelper.getOsobe(context), type);
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
 
@@ -66,8 +67,6 @@ public class Prijava extends AppCompatActivity {
                                 intent.putExtra("osoba", os);
                                 startActivity(intent);
                                 finish();
-                    }else{
-                        Toast.makeText(context, "Korisnik ne postoji!",Toast.LENGTH_LONG).show();
                     }
                 }
 

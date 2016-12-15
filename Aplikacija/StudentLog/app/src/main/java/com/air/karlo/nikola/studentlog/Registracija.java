@@ -11,8 +11,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.lang.reflect.Type;
 
 import com.example.core.PreferenceManagerHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Registracija extends AppCompatActivity {
@@ -99,9 +105,26 @@ public class Registracija extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                             regisOk = false;
                 }//lozinka
+
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Osoba>>(){}.getType();
+                List<Osoba> listaOsoba = gson.fromJson(PreferenceManagerHelper.getOsobe(context), type);
+                List<Osoba> osobe =  new ArrayList<Osoba>();
+                for (Osoba os:listaOsoba) {
+                    osobe.add(os);
+                        if(os.korime.equals(osoba.korime)){
+                            regisOk = false;
+                            break;
+                    }
+                    }
                 if(regisOk){
-                    PreferenceManagerHelper.spremiOsoba(osoba.oib,osoba.ime,osoba.prezime,osoba.korime,osoba.lozinka,osoba.uloga,context);
+                    osobe.add(osoba);
+                    String jsonOsobe = gson.toJson(osobe);
+                    PreferenceManagerHelper.spremiOsoba(jsonOsobe,context);
                     closeRegOpenPrij();
+                }   else {
+                    Toast.makeText(context, "Korisnicko ime vec postoji!",
+                            Toast.LENGTH_LONG).show();
                 }
 
             }

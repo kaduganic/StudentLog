@@ -4,48 +4,32 @@ import android.content.Context;
 import java.util.ArrayList;
 
 public class PreferenceManagerHelper {
-    public static void spremiOsoba(int oib,String ime, String prezime, String korime, String lozinka, String uloga, Context context)
+
+    public static void spremiOsoba(String osobe, Context context)
     {
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putInt("oib", oib)
-                .putString("ime", ime)
-                .putString("prezime", prezime)
-                .putString("korime", korime)
-                .putString("lozinka", lozinka)
-                .putString("uloga", uloga)
+                .putString("osobe", osobe)
                 .commit();
     }
 
-    public static String getLozinka(Context context)
-    {
-        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
-                .getString("lozinka", "");
+    public static void spremiKolegij(String kolegiji, Context context){
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString("kolegiji", kolegiji)
+                .commit();
     }
-    public static int getOib(Context context)
-    {
+
+
+    public static String getOsobe(Context context){
         return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
-                .getInt("oib", 1);
+                .getString("osobe","");
     }
-    public static String getIme(Context context)
-    {
+
+    public static String getKolegije(Context context){
         return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
-                .getString("ime", "");
+                .getString("kolegiji", "");
     }
-    public static String getPrezime(Context context)
-    {
-        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
-                .getString("prezime", "");
-    }
-    public static String getKorime(Context context)
-    {
-        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
-                .getString("korime", "");
-    }
-    public static String getUloga(Context context)
-    {
-        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
-                .getString("uloga", "");
-    }
+
 
 }
