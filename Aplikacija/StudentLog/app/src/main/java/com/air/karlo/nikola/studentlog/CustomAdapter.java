@@ -15,7 +15,7 @@ import java.util.List;
 class CustomAdapter extends ArrayAdapter<Kolegiji> {
 
 
-    public CustomAdapter(Context context, ArrayList<Kolegiji> kolegiji) {
+    public CustomAdapter(Context context, List<Kolegiji> kolegiji) {
         super(context, 0,  kolegiji);
     }
 

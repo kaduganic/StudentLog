@@ -9,7 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.core.PreferenceManagerHelper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nikola on 14.12.2016..
@@ -22,6 +28,7 @@ public class PregledKolegija extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Context context = getApplicationContext();
         setContentView(R.layout.pregled_kolegija);
         osoba = new Osoba();
         osoba = getIntent().getExtras().getParcelable("osoba");
@@ -29,16 +36,22 @@ public class PregledKolegija extends AppCompatActivity {
         txtImePrezime.setText(osoba.ime  + " " + osoba.prezime);
 
 
-        ArrayList<Kolegiji> kolegiji = new ArrayList<>();
-        Kolegiji kol1 = new Kolegiji(1 , "Baze znanja 1", 5);
-        Kolegiji kol2 = new Kolegiji(2, "Programiranje" , 3);
-        kolegiji.add(kol1);
-        kolegiji.add(kol2);
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Kolegiji>>(){}.getType();
+        List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), type);
+        List<Kolegiji> listaTrenutnogProf = new ArrayList<>();
 
-        CustomAdapter pregledKolegija = new CustomAdapter(this, kolegiji);
+        if(listaSvihKolegija != null){
+            for (Kolegiji kol:listaSvihKolegija) {
+                if(kol.idNositelj == osoba.oib )
+                    listaTrenutnogProf.add(kol);
+            }
+            CustomAdapter pregledKolegija = new CustomAdapter(this, listaTrenutnogProf);
 
-        ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
-        listView.setAdapter(pregledKolegija);
+            ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
+            listView.setAdapter(pregledKolegija);
+        }
+
     }
 
     @Override

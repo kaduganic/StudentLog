@@ -110,13 +110,16 @@ public class Registracija extends AppCompatActivity {
                 Type type = new TypeToken<List<Osoba>>(){}.getType();
                 List<Osoba> listaOsoba = gson.fromJson(PreferenceManagerHelper.getOsobe(context), type);
                 List<Osoba> osobe =  new ArrayList<Osoba>();
-                for (Osoba os:listaOsoba) {
-                    osobe.add(os);
+                if(listaOsoba != null){
+                    for (Osoba os:listaOsoba) {
+                        osobe.add(os);
                         if(os.korime.equals(osoba.korime)){
                             regisOk = false;
                             break;
+                        }
                     }
-                    }
+                }
+
                 if(regisOk){
                     osobe.add(osoba);
                     String jsonOsobe = gson.toJson(osobe);

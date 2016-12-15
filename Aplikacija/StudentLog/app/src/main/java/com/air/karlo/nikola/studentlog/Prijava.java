@@ -62,11 +62,13 @@ public class Prijava extends AppCompatActivity {
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
 
-                for (Osoba os:osobe) {
-                    if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){
-                                intent.putExtra("osoba", os);
-                                startActivity(intent);
-                                finish();
+                if(osobe != null){
+                    for (Osoba os:osobe) {
+                        if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){
+                            intent.putExtra("osoba", os);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 }
 
