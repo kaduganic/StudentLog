@@ -23,10 +23,17 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import webservice.StudentLogApi;
+
 
 public class Prijava extends AppCompatActivity {
 
     TextView korisnickoIme,lozinka;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
