@@ -53,12 +53,16 @@ public class Meni extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, KreiranjeKolegija.class);
+                Intent intentst = new Intent(context, PregledKolegija.class);
                 if(osoba.uloga.equals("Profesor")){
                     intent.putExtra("osoba", osoba);
                     startActivity(intent);
                     finish();
                 }else if(osoba.uloga.equals("Student")){
                     //odabir kolegija
+                    intentst.putExtra("osoba", osoba);
+                    startActivity(intentst);
+                    finish();
                 }
             }
         });
@@ -73,6 +77,7 @@ public class Meni extends AppCompatActivity {
                     finish();
                 }else if(osoba.uloga.equals("Student")){
                     //pregled kolegija
+
                 }
             }
         });

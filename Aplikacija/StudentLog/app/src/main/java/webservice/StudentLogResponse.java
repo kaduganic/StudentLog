@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 
 
 public class StudentLogResponse {
-
+/*
     public static final String BASE_URL = "http//....";
     public static final String ENDPOINT = "http//....com";
 
@@ -55,4 +55,5 @@ public class StudentLogResponse {
         });
 
     }
+    */
 }
