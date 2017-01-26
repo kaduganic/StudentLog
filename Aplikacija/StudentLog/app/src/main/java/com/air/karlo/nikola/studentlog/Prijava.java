@@ -66,17 +66,21 @@ public class Prijava extends AppCompatActivity {
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<Osoba>>(){}.getType();
                 List<Osoba> osobe = gson.fromJson(PreferenceManagerHelper.getOsobe(context), type);
+
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
-
+                boolean statusPronadenog = true;
                 if(osobe != null){
                     for (Osoba os:osobe) {
                         if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){
                             intent.putExtra("osoba", os);
                             startActivity(intent);
                             finish();
-                        }
+                            statusPronadenog = false;
+                            break;
+                        }else statusPronadenog = true;
                     }
+                    if(statusPronadenog) Toast.makeText(context, "Korisnik ne postoji!",Toast.LENGTH_SHORT).show();
                 }
 
             }

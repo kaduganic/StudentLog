@@ -20,7 +20,7 @@ public class PreferenceManagerHelper {
                 .commit();
     }
 
-    public static void spremiStudentImaKoleg(String studImaK, Context context)
+    public static void spremiStudentImaKolegij(String studImaK, Context context)
     {
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()

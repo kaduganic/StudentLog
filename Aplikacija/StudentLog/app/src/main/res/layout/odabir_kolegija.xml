@@ -23,7 +23,22 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="268dp"
-        android:layout_weight="0.52"
+        android:layout_weight="0.56"
         android:id="@+id/lstOdabirKolegija"
         />
+
+    <Button
+        android:text="Odaberi kolegije"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnOdaberiKolegije"
+        android:textAlignment="center"
+        style="@style/Widget.AppCompat.Button" />
+
+    <Button
+        android:text="Ucitaj moje podatke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMojiPodaciOdaberiKolegije"
+        android:layout_weight="0.03" />
 </LinearLayout>

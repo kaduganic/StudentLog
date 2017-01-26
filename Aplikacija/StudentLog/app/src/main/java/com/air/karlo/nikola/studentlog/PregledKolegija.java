@@ -17,6 +17,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.type;
+
 /**
  * Created by Nikola on 14.12.2016..
  */
@@ -37,16 +39,25 @@ public class PregledKolegija extends AppCompatActivity {
 
 
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Kolegiji>>(){}.getType();
-        List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), type);
-        List<Kolegiji> listaTrenutnogProf = new ArrayList<>();
+        Type typeKol = new TypeToken<List<Kolegiji>>(){}.getType();
+        Type typeStImKol = new TypeToken<List<StudentImaKolegij>>(){}.getType();
+        List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol);
+        List<Kolegiji> listaTrenutnog = new ArrayList<>();
+        List<StudentImaKolegij> listStudnImaKol = gson.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), typeStImKol);
 
         if(listaSvihKolegija != null){
-            for (Kolegiji kol:listaSvihKolegija) {
-                if(kol.idNositelj == osoba.oib )
-                    listaTrenutnogProf.add(kol);
+                for (Kolegiji kol : listaSvihKolegija) {
+                    if(kol.idNositelj == osoba.oib )
+                        listaTrenutnog.add(kol);
+                    if(osoba.uloga.equals("Student")){
+                        for(StudentImaKolegij stImKo : listStudnImaKol) {
+                            if (stImKo.idKolegij == kol.id){
+                                listaTrenutnog.add(kol);
+                            }
+                        }
+                }
             }
-            CustomAdapter pregledKolegija = new CustomAdapter(this, listaTrenutnogProf);
+            CustomAdapter pregledKolegija = new CustomAdapter(this, listaTrenutnog);
 
             ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
             listView.setAdapter(pregledKolegija);
