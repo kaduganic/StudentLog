@@ -26,6 +26,9 @@ public class KreiranjeKolegija extends AppCompatActivity {
 
     Osoba osoba;
     TextView txtImePrezime, txtNazivKolegija, txtEcstKolegija;
+    final Kolegiji koleg = new Kolegiji();
+    int brojac;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +40,13 @@ public class KreiranjeKolegija extends AppCompatActivity {
         txtNazivKolegija = (TextView) findViewById(R.id.txtNazivKolegijaKreiraj);
         txtEcstKolegija = (TextView) findViewById(R.id.txtEctsKreirajKolegij);
 
+        brojac = 0;
         addListenerToButton();
     }
 
     private void addListenerToButton(){
         final Context context = getApplicationContext();
         Button kreiranjeKolegija = (Button) findViewById(R.id.btnSpremiKreiranjeKolegija);
-        final Kolegiji koleg = new Kolegiji();
 
         kreiranjeKolegija.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +75,7 @@ public class KreiranjeKolegija extends AppCompatActivity {
                     List<Kolegiji> kolegiji =  new ArrayList<Kolegiji>();
 
                     if(listaKolegija != null){
+                        brojac = listaKolegija.size();
                         for (Kolegiji ko:listaKolegija) {
                             kolegiji.add(ko);
                             if(ko.naziv.equals(koleg.naziv)){
@@ -82,6 +86,7 @@ public class KreiranjeKolegija extends AppCompatActivity {
                     }
                     if(regisOk){
                         koleg.idNositelj = osoba.oib;
+                        koleg.id = brojac;
                         kolegiji.add(koleg);
                         String jsonKolegij = gson.toJson(kolegiji);
                         PreferenceManagerHelper.spremiKolegij(jsonKolegij,context);

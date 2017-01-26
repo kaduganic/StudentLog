@@ -20,6 +20,13 @@ public class PreferenceManagerHelper {
                 .commit();
     }
 
+    public static void spremiStudentImaKoleg(String studImaK, Context context)
+    {
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString("studImaK", studImaK)
+                .commit();
+    }
 
     public static String getOsobe(Context context){
         return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
@@ -31,5 +38,9 @@ public class PreferenceManagerHelper {
                 .getString("kolegiji", "");
     }
 
+    public static String getStudentImaKoleg(Context context){
+        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .getString("studImaK", "");
+    }
 
 }

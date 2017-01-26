@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/txtImePrezimeOdabirKolegija"
+        android:layout_weight="0.21" />
+
+    <TextView
+        android:text="Odabir kolegija"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNaslovOdabirKolegija"
+        android:layout_weight="0.21"
+        android:textSize="36sp"
+        android:textAlignment="center" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="268dp"
+        android:layout_weight="0.52"
+        android:id="@+id/lstOdabirKolegija"
+        />
+</LinearLayout>
