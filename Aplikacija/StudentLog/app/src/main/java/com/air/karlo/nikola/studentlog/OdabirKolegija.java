@@ -1,11 +1,9 @@
 package com.air.karlo.nikola.studentlog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,10 +20,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.graphics.Color.BLUE;
-import static android.graphics.Color.GRAY;
+import tipoviPodatka.Kolegiji;
+import tipoviPodatka.Osoba;
+import tipoviPodatka.StudentImaKolegij;
+
 import static android.graphics.Color.LTGRAY;
-import static com.air.karlo.nikola.studentlog.R.styleable.View;
 
 /**
  * Created by Nikola on 25.1.2017..

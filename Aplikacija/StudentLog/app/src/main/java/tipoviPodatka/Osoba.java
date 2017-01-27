@@ -1,8 +1,7 @@
-package com.air.karlo.nikola.studentlog;
+package tipoviPodatka;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 
 /**
  * Created by Nikola on 10.11.2016..
@@ -10,12 +9,12 @@ import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 
 public class Osoba implements Parcelable {
 
-    int oib;
-    String ime;
-    String prezime;
-    String korime;
-    String lozinka;
-    String uloga;
+    public int oib;
+    public String ime;
+    public String prezime;
+    public String korime;
+    public String lozinka;
+    public String uloga;
 
     public Osoba(){}
 

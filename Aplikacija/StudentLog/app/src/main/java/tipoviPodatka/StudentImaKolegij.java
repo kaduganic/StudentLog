@@ -1,4 +1,4 @@
-package com.air.karlo.nikola.studentlog;
+package tipoviPodatka;
 
 /**
  * Created by Nikola on 25.1.2017..
@@ -8,8 +8,8 @@ public class StudentImaKolegij {
 
     public StudentImaKolegij(){}
 
-    int idStudent;
-    int idKolegij;
+    public int idStudent;
+    public int idKolegij;
 
     public StudentImaKolegij(int idS, int idK) {
         idStudent = idS;

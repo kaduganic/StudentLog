@@ -1,7 +1,7 @@
 package webservice;
 
-import com.air.karlo.nikola.studentlog.Kolegiji;
-import com.air.karlo.nikola.studentlog.Osoba;
+import tipoviPodatka.Kolegiji;
+import tipoviPodatka.Osoba;
 
 import java.util.List;
 

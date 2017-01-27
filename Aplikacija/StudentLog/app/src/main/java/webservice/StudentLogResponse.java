@@ -1,14 +1,5 @@
 package webservice;
 
-import com.air.karlo.nikola.studentlog.Kolegiji;
-import com.air.karlo.nikola.studentlog.Osoba;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-
 
 public class StudentLogResponse {
 /*

@@ -28,6 +28,13 @@ public class PreferenceManagerHelper {
                 .commit();
     }
 
+    public static void spremiGeneriraniKod (String generKod, Context context){
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString("generKod",generKod)
+                .commit();
+    }
+
     public static String getOsobe(Context context){
         return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .getString("osobe","");
@@ -41,6 +48,11 @@ public class PreferenceManagerHelper {
     public static String getStudentImaKoleg(Context context){
         return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .getString("studImaK", "");
+    }
+
+    public static String getGeneriraniKod(Context context){
+        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .getString("generKod","");
     }
 
 }

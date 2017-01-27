@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tipoviPodatka.Kolegiji;
+
 /**
  * Created by Nikola on 25.1.2017..
  */

@@ -18,6 +18,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import tipoviPodatka.Kolegiji;
+import tipoviPodatka.Osoba;
+
 /**
  * Created by Nikola on 1.12.2016..
  */

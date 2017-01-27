@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,7 +16,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.type;
+import tipoviPodatka.Kolegiji;
+import tipoviPodatka.Osoba;
+import tipoviPodatka.StudentImaKolegij;
 
 /**
  * Created by Nikola on 14.12.2016..
