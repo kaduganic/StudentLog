@@ -55,7 +55,7 @@ public class KreiranjeKolegija extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Boolean regisOk = true;
-                if(!txtNazivKolegija.getText().equals("")){
+                if(!txtNazivKolegija.getText().toString().matches("")){
                     koleg.naziv = txtNazivKolegija.getText().toString();
                 }else{
                     Toast.makeText(context, "Naziv je prazno polje",
@@ -63,7 +63,7 @@ public class KreiranjeKolegija extends AppCompatActivity {
                     regisOk = false;
                 }//naziv
 
-                if(!txtEcstKolegija.getText().equals("")){
+                if(!txtEcstKolegija.getText().toString().matches("")){
                     koleg.ects = Integer.parseInt(txtEcstKolegija.getText().toString());
                 }else{
                     Toast.makeText(context, "Ects je prazno polje",

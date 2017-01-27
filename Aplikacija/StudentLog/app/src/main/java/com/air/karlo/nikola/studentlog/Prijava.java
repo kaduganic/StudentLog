@@ -59,7 +59,7 @@ public class Prijava extends AppCompatActivity {
 
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
-                boolean statusPronadenog = true;
+                boolean statusPronadenog = true , statusPopunjenosti = true;
                 if(osobe != null){
                     for (Osoba os:osobe) {
                         if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){

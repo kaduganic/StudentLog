@@ -102,6 +102,7 @@ public class KreiranjeKoda extends AppCompatActivity{
             Gson gson = new Gson();
             Type type = new TypeToken<List<Kod>>(){}.getType();
             List<Kod> listaStarihKodova = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(context), type);
+            List<Kod> listaNovihKodova = new ArrayList<Kod>();
             @Override
             public void onClick(View v) {
                 if (sItems.getSelectedItem() != null) {       //povjera izabranog kolegija na dropdown
@@ -125,17 +126,36 @@ public class KreiranjeKoda extends AppCompatActivity{
                 }
 
                 String jsonKodovi;
-                if (statusUnosa && imgQR.getDrawable() != null) {   //spremanje u bazu
-                    listaStarihKodova.add(kodDolaska);
-                    jsonKodovi = gson.toJson(listaStarihKodova);
-                    PreferenceManagerHelper.spremiGeneriraniKod(jsonKodovi, context);
-                    Toast.makeText(context, "Sifra i QR dolaska spremljeni su u bazu!", Toast.LENGTH_SHORT).show();
-                } else if (statusUnosa) {
-                    listaStarihKodova.add(kodDolaska);
-                    jsonKodovi = gson.toJson(listaStarihKodova);
-                    PreferenceManagerHelper.spremiGeneriraniKod(jsonKodovi, context);
-                    Toast.makeText(context, "Sifra dolaska spremljena je u bazu!", Toast.LENGTH_SHORT).show();
+                boolean status = false;
+                if(listaStarihKodova != null){
+                    for(Kod k : listaStarihKodova){
+                        listaNovihKodova.add(k);
+                    }
+                    if (statusUnosa && imgQR.getDrawable() != null) {   //spremanje u bazu
+                        listaNovihKodova.add(kodDolaska);
+                        jsonKodovi = gson.toJson(listaNovihKodova);
+                        PreferenceManagerHelper.spremiGeneriraniKod(jsonKodovi, context);
+                        Toast.makeText(context, "Sifra i QR dolaska spremljeni su u bazu!", Toast.LENGTH_SHORT).show();
+                    } else if (statusUnosa) {
+                        listaNovihKodova.add(kodDolaska);
+                        jsonKodovi = gson.toJson(listaNovihKodova);
+                        PreferenceManagerHelper.spremiGeneriraniKod(jsonKodovi, context);
+                        Toast.makeText(context, "Sifra dolaska spremljena je u bazu!", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    if (statusUnosa && imgQR.getDrawable() != null) {   //spremanje u bazu
+                        listaNovihKodova.add(kodDolaska);
+                        jsonKodovi = gson.toJson(listaNovihKodova);
+                        PreferenceManagerHelper.spremiGeneriraniKod(jsonKodovi, context);
+                        Toast.makeText(context, "Sifra i QR dolaska spremljeni su u bazu!", Toast.LENGTH_SHORT).show();
+                    } else if (statusUnosa) {
+                        listaNovihKodova.add(kodDolaska);
+                        jsonKodovi = gson.toJson(listaNovihKodova);
+                        PreferenceManagerHelper.spremiGeneriraniKod(jsonKodovi, context);
+                        Toast.makeText(context, "Sifra dolaska spremljena je u bazu!", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
     }

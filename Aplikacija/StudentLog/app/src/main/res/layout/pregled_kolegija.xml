@@ -10,22 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtImePrezime"
-        android:layout_weight="0.64" />
+        android:layout_weight="0.16" />
 
     <TextView
         android:text="Pregled kolegija"
         android:layout_width="385dp"
         android:layout_height="wrap_content"
         android:id="@+id/txtNaslov"
-        android:layout_weight="0.60"
+        android:layout_weight="0.13"
         android:textAlignment="center"
         android:textSize="36sp" />
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="401dp"
+        android:layout_height="311dp"
         android:id="@+id/lstPregledKolegija"
         android:headerDividersEnabled="false"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:layout_weight="0.60" />
 </LinearLayout>
