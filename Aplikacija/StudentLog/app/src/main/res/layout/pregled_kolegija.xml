@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    style="@style/main_app_theme">>
 
     <TextView
         android:text="TextView"
@@ -21,7 +22,10 @@
         android:textSize="36sp" />
 
     <ListView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="401dp"
-        android:id="@+id/lstPregledKolegija" />
+        android:id="@+id/lstPregledKolegija"
+        android:headerDividersEnabled="false"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 </LinearLayout>

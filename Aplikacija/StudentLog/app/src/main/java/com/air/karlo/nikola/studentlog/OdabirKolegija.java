@@ -113,6 +113,8 @@ public class OdabirKolegija extends AppCompatActivity {
                     Type type3 = new TypeToken<List<StudentImaKolegij>>() {}.getType();
                     List<StudentImaKolegij> listaStudImaKol = gson3.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), type3);
                     for (Kolegiji kol : listaSvihKolegija) {
+                        listView.getChildAt(kol.id).setEnabled(true);
+                        listView.getChildAt(kol.id).setBackgroundColor(0);
                         if (listaStudImaKol != null) {
                             for (StudentImaKolegij stImK : listaStudImaKol) {
                                 if (kol.id == stImK.idKolegij) {

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    style="@style/main_app_theme">>
 
     <TextView
         android:text="TextView"
@@ -25,7 +26,8 @@
         android:layout_height="268dp"
         android:layout_weight="0.56"
         android:id="@+id/lstOdabirKolegija"
-        />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
     <Button
         android:text="Odaberi kolegije"
@@ -33,12 +35,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnOdaberiKolegije"
         android:textAlignment="center"
-        style="@style/Widget.AppCompat.Button" />
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
     <Button
         android:text="Ucitaj moje podatke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnMojiPodaciOdaberiKolegije"
-        android:layout_weight="0.03" />
+        android:layout_weight="0.00"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp" />
 </LinearLayout>

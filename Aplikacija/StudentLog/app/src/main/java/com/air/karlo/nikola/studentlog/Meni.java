@@ -98,7 +98,11 @@ public class Meni extends AppCompatActivity {
         btnQRKod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //profesor kreira kod
+                Intent intent = new Intent(context, KreiranjeKoda.class);
+                intent.putExtra("osoba",osoba);
+                startActivity(intent);
+                finish();
             }
         });
     }

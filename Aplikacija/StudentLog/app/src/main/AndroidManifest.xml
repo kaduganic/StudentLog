@@ -27,6 +27,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".OdabirKolegija"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".KreiranjeKoda"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
