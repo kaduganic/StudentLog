@@ -29,6 +29,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".KreiranjeKoda"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".PrijavaDolaska"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

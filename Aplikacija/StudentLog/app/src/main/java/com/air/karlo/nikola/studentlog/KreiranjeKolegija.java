@@ -58,15 +58,15 @@ public class KreiranjeKolegija extends AppCompatActivity {
                 if(!txtNazivKolegija.getText().toString().matches("")){
                     koleg.naziv = txtNazivKolegija.getText().toString();
                 }else{
-                    Toast.makeText(context, "Naziv je prazno polje",
+                    Toast.makeText(context, "Naziv je prazno polje!",
                             Toast.LENGTH_LONG).show();
                     regisOk = false;
                 }//naziv
 
-                if(!txtEcstKolegija.getText().toString().matches("")){
+                if(!txtEcstKolegija.getText().toString().matches("") && !txtEcstKolegija.getText().toString().matches("[a-zA-Z]+")){
                     koleg.ects = Integer.parseInt(txtEcstKolegija.getText().toString());
                 }else{
-                    Toast.makeText(context, "Ects je prazno polje",
+                    Toast.makeText(context, "Ects je prazno polje ili nije numericka vrijednost!",
                             Toast.LENGTH_LONG).show();
                     regisOk = false;
                 }//ects

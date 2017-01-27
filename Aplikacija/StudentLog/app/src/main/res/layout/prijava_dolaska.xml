@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/main_app_theme"
+    android:weightSum="1">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtImePrezimePrijavaDolaska"
+        android:layout_weight="0.08" />
+
+    <TextView
+        android:text="Prijava dolaska"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNaslovPrijavaDolaska"
+        android:layout_weight="0.08"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:text="Kod dolaska"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtxtUnesiteSifru"
+        android:layout_weight="0.10"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:text="Unesi rucno kod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUnesiRucno"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="0.04"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:text="Skeniraj QR kod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSkenirajQRPrijavaDolaska"
+        android:textAlignment="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="0.03" />
+
+    <Button
+        android:text="Prijavi dolazak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnPrijaviDolazak"
+        android:textAlignment="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="25dp" />
+
+</LinearLayout>

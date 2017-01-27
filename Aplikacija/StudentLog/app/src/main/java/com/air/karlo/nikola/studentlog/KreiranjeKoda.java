@@ -126,7 +126,6 @@ public class KreiranjeKoda extends AppCompatActivity{
                 }
 
                 String jsonKodovi;
-                boolean status = false;
                 if(listaStarihKodova != null){
                     for(Kod k : listaStarihKodova){
                         listaNovihKodova.add(k);

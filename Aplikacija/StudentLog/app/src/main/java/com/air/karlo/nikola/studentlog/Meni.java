@@ -92,6 +92,10 @@ public class Meni extends AppCompatActivity {
                     //pregled dolazaka
                 }else if(osoba.uloga.equals("Student")){
                     //prijava dolazaka
+                    Intent intent = new Intent(context, PrijavaDolaska.class);
+                    intent.putExtra("osoba", osoba);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -110,14 +114,18 @@ public class Meni extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        final Intent intent = new Intent(this, Prijava.class);
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Zatvaranje aplikacije")
-                .setMessage("Da li ste sigurni da želite izaći?")
+                .setMessage("Da li ste sigurni da želite izaći i odjaviti se?")
                 .setPositiveButton("Da", new DialogInterface.OnClickListener()
                 {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        intent.putExtra("osoba",osoba);
+                        startActivity(intent);
                         finish();
                     }
 

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/main_app_theme">
+    style="@style/main_app_theme"
+    android:weightSum="1">
 
     <TextView
         android:text="TextView"
@@ -20,7 +21,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_weight="0.17">
 
         <Button
             android:text="Button"
@@ -28,48 +30,58 @@
             android:id="@+id/btnKolegij"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_width="200dp" />
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_weight="0.04">
 
         <Button
             android:text="Button"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnPregledKolegija"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_weight="0.11">
 
         <Button
             android:text="Button"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnDolasci"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_weight="0.11">
 
         <Button
             android:text="Button"
             android:layout_height="wrap_content"
             android:id="@+id/btnQRkod"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_width="200dp" />
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
     </RelativeLayout>
 
 </LinearLayout>
