@@ -19,7 +19,11 @@ import com.google.gson.reflect.TypeToken;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
+import dohvacanjePodataka.dohvacanjeQRSifri;
+import dohvacanjePodataka.dohvatRucnoUnesenihSifri;
 import tipoviPodatka.Kod;
 import tipoviPodatka.Osoba;
 
@@ -27,9 +31,11 @@ import tipoviPodatka.Osoba;
  * Created by Nikola on 27.1.2017..
  */
 
-public class PrijavaDolaska extends AppCompatActivity implements DohvacanjeKodaInterface{
+public class PrijavaDolaska extends AppCompatActivity{
 
     Osoba osoba;
+    DohvacanjeKodaInterface dohvacanjeKodaDolaska;
+
     Button btnSkenirajQR, btnPrijaviDolazak, btnUnesiRucnoKod;
     TextView edTxtKodDolaska;
     @Override
@@ -48,17 +54,12 @@ public class PrijavaDolaska extends AppCompatActivity implements DohvacanjeKodaI
         TextView txtKorisnik = (TextView) findViewById(R.id.txtImePrezimePrijavaDolaska);
         txtKorisnik.setText(osoba.ime  + " " + osoba.prezime);
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<Kod>>(){}.getType();
-        List<Kod> listaSvihKodova = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(context), type);
-
-        DohvacanjeKodaInterface dohvacanjeKodaDolaska;
-        dohvacanjeKodaDolaska = new PrijavaDolaska();
-
-
         btnUnesiRucnoKod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dohvacanjeKodaDolaska = new dohvatRucnoUnesenihSifri();
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 final EditText edittext = new EditText(context);
                 alert.setMessage("Unesite kod u prostor ispod.");
@@ -79,6 +80,9 @@ public class PrijavaDolaska extends AppCompatActivity implements DohvacanjeKodaI
         btnSkenirajQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dohvacanjeKodaDolaska = new dohvacanjeQRSifri();
+
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("Skeniraj");
@@ -89,13 +93,19 @@ public class PrijavaDolaska extends AppCompatActivity implements DohvacanjeKodaI
             }
         });
 
+
         btnPrijaviDolazak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(edTxtKodDolaska.getText().toString().matches("")){
                     Toast.makeText(context, "Unesite kod dolaska!", Toast.LENGTH_SHORT).show();
                 }else{
-
+                    dohvacanjeKodaDolaska.dohvacanjeKoda(new DohvacanjeKodaListener() {
+                        @Override
+                        public void DohvaceniKod(List<Kod> dohvatKoda) {
+                            List<Kod> listaSvihKodova  = dohvatKoda;
+                        }
+                    },context);
                 }
             }
         });
@@ -125,10 +135,5 @@ public class PrijavaDolaska extends AppCompatActivity implements DohvacanjeKodaI
         intent.putExtra("osoba", osoba);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void dohvacanjeKoda(DohvacanjeKodaListener listener, Context c) {
-        listener.DohaceniKod(edTxtKodDolaska.getText().toString());
     }
 }

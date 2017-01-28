@@ -1,11 +1,11 @@
 package com.air.karlo.nikola.studentlog;
-
-import android.content.Context;
+import java.util.List;
+import tipoviPodatka.Kod;
 
 /**
  * Created by Nikola on 27.1.2017..
  */
 
 public interface DohvacanjeKodaListener {
-    void DohaceniKod(String dohvatKoda);
+    void DohvaceniKod(List<Kod> dohvatKoda);
 }
