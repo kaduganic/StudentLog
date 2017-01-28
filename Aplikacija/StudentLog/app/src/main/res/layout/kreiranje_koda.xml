@@ -4,7 +4,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/main_app_theme"
-    android:weightSum="1">>
+    android:weightSum="1"><![CDATA[>
+
+
+
+    ]]>
 
     <TextView
         android:text="TextView"
@@ -18,42 +22,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtNaslovKreiranjeKoda"
-        android:layout_weight="0.06"
+        android:layout_weight="0.27"
         android:textSize="36sp"
         android:textAlignment="center" />
 
-    <Spinner
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spnrPopisKolegijaKreiranjeKoda"
-        android:layout_weight="0.06"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
-        android:textAlignment="center"
-        android:spinnerMode="dialog" />
+        android:layout_height="47dp">
 
-    <EditText
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:hint="Unesite sifru dolaska"
+            android:ems="10"
+            android:id="@+id/edTxtUnosKreiranjaKoda"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spnrPopisKolegijaKreiranjeKoda"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
+
+    <DatePicker
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Unesite sifru dolaska"
-        android:ems="10"
-        android:id="@+id/edTxtUnosKreiranjaKoda"
-        android:layout_weight="0.03"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="68dp"
+        android:id="@+id/dtDatumKreirajKod"
+        android:headerBackground="@android:color/holo_blue_light"
+        android:layout_gravity="center"
+        style="@android:style/Widget.DatePicker"
         android:layout_marginTop="10dp"
-        android:textAlignment="center" />
+        android:layout_marginBottom="20dp" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="177dp"
+        android:layout_height="213dp"
 
         android:id="@+id/imgQRcode"
-        android:layout_weight="0.68"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:textAlignment="center"
+        android:layout_weight="0.21"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <LinearLayout
         android:orientation="horizontal"

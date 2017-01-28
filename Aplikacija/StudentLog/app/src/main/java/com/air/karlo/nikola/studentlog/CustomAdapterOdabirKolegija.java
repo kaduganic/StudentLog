@@ -37,7 +37,7 @@ public class CustomAdapterOdabirKolegija extends ArrayAdapter<Kolegiji> {
         TextView ects = (TextView) convertView.findViewById(R.id.txtEctsAdapter);
 
         nazivKolegija.setText(singleKolegij.naziv);
-        ects.setText(singleKolegij.ects + " ectsa");
+        ects.setText(singleKolegij.ects + " ects boda");
 
         return convertView;
     }

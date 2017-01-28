@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,8 +30,10 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
+import java.text.SimpleDateFormat;
 import tipoviPodatka.Kod;
 import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
@@ -44,7 +49,7 @@ public class KreiranjeKoda extends AppCompatActivity{
     Button generateQR, spremiQR;
     ImageView imgQR;
     Kod kodDolaska = new Kod();
-
+    DatePicker datum;
 
 
     @Override
@@ -61,6 +66,7 @@ public class KreiranjeKoda extends AppCompatActivity{
         generateQR = (Button)findViewById(R.id.btnGenerirajQRcode);
         spremiQR = (Button) findViewById(R.id.btnSpremiQR);
         imgQR = (ImageView) findViewById(R.id.imgQRcode);
+        datum = (DatePicker) findViewById(R.id.dtDatumKreirajKod);
 
         //preuzimanje i prikaz kolegija od trenutno ulogiranog profesora
         Gson gson = new Gson();
@@ -103,6 +109,7 @@ public class KreiranjeKoda extends AppCompatActivity{
             Type type = new TypeToken<List<Kod>>(){}.getType();
             List<Kod> listaStarihKodova = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(context), type);
             List<Kod> listaNovihKodova = new ArrayList<Kod>();
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 if (sItems.getSelectedItem() != null) {       //povjera izabranog kolegija na dropdown
@@ -116,6 +123,11 @@ public class KreiranjeKoda extends AppCompatActivity{
 
                 if (!unosQR.getText().toString().matches("")) {               //provjera unesene sifre
                     kodDolaska.sifraDolaska = unosQR.getText().toString();
+                    int   day  = datum.getDayOfMonth();
+                    int   month= datum.getMonth();
+                    int   year = datum.getYear();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    kodDolaska.datum = sdf.format(new Date(year, month, day));
                 } else {
                     Toast.makeText(context, "Morate unesti sifru dolaska!", Toast.LENGTH_SHORT).show();
                     statusUnosa = false;
@@ -158,6 +170,7 @@ public class KreiranjeKoda extends AppCompatActivity{
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {

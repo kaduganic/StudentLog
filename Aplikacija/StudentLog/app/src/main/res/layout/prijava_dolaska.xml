@@ -34,6 +34,16 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="35dp" />
 
+    <DatePicker
+        android:layout_width="288dp"
+        android:layout_height="60dp"
+        android:id="@+id/dtIzaberiDatumPrijavaDolaska"
+        android:headerBackground="@android:color/holo_blue_dark"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        style="@android:style/Widget.DatePicker"
+        android:layout_weight="0.33" />
+
     <Button
         android:text="Unesi rucno kod"
         android:layout_width="match_parent"
@@ -42,7 +52,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_weight="0.04"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="25dp" />
 
     <Button
         android:text="Skeniraj QR kod"
@@ -52,7 +62,7 @@
         android:textAlignment="center"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.03" />
 
     <Button
@@ -63,6 +73,7 @@
         android:textAlignment="center"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:layout_weight="0.17" />
 
 </LinearLayout>

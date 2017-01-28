@@ -10,14 +10,14 @@ public class PreferenceManagerHelper {
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString("osobe", osobe)
-                .commit();
+                .apply();       //commit odmah sprema u bazu dok apply to odradi u pozadini
     }
 
     public static void spremiKolegij(String kolegiji, Context context){
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString("kolegiji", kolegiji)
-                .commit();
+                .apply();
     }
 
     public static void spremiStudentImaKolegij(String studImaK, Context context)
@@ -25,14 +25,21 @@ public class PreferenceManagerHelper {
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString("studImaK", studImaK)
-                .commit();
+                .apply();
     }
 
     public static void spremiGeneriraniKod (String generKod, Context context){
         android.preference.PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString("generKod",generKod)
-                .commit();
+                .apply();
+    }
+
+    public static void spremiDolaske (String dolasci, Context context){
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString("dolasci",dolasci)
+                .apply();
     }
 
     public static String getOsobe(Context context){
@@ -55,4 +62,8 @@ public class PreferenceManagerHelper {
                 .getString("generKod","");
     }
 
+    public static String getDolasci(Context context){
+        return android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .getString("dolasci","");
+    }
 }
