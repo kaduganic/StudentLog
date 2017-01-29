@@ -17,7 +17,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
@@ -43,7 +45,6 @@ public class PregledKolegija extends AppCompatActivity {
         txtImePrezime = (TextView) findViewById(R.id.txtImePrezime);
         txtImePrezime.setText(osoba.ime  + " " + osoba.prezime);
 
-
         Gson gson = new Gson();
         Type typeKol = new TypeToken<List<Kolegiji>>(){}.getType();
         Type typeStImKol = new TypeToken<List<StudentImaKolegij>>(){}.getType();
@@ -57,13 +58,19 @@ public class PregledKolegija extends AppCompatActivity {
                         listaTrenutnog.add(kol);
                     if(osoba.uloga.equals("Student")){
                         for(StudentImaKolegij stImKo : listStudnImaKol) {
-                            if (stImKo.idKolegij == kol.id){
+                            if (stImKo.idKolegij == kol.id && stImKo.idStudent == osoba.oib){
                                 listaTrenutnog.add(kol);
+                                Set<Kolegiji> hs = new HashSet<>();
+                                hs.addAll(listaTrenutnog);
+                                listaTrenutnog.clear();
+                                listaTrenutnog.addAll(hs);
                             }
                         }
                 }
             }
             CustomAdapter pregledKolegija = new CustomAdapter(this, listaTrenutnog);
+
+
 
             final ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
             listView.setAdapter(pregledKolegija);
@@ -72,9 +79,10 @@ public class PregledKolegija extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Kolegiji kolegijii = (Kolegiji) parent.getItemAtPosition(position);
                     listView.getChildAt(position).setEnabled(true);
                     for (Kolegiji kol : listaSvihKolegija) {
-                        if (kol.id == position){
+                        if (kol.naziv == kolegijii.naziv){
                             Intent intent = new Intent(context, DetaljiKolegija.class);
                             intent.putExtra("osoba", osoba);
                             intent.putExtra("kolegij",kol);

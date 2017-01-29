@@ -51,9 +51,7 @@ public class OdabirKolegija extends AppCompatActivity {
 
         Gson gson1 = new Gson();
         Type type1 = new TypeToken<List<Kolegiji>>() {}.getType();
-        Type type2 = new TypeToken<List<StudentImaKolegij>>() {}.getType();
         final List<Kolegiji> listaSvihKolegija = gson1.fromJson(PreferenceManagerHelper.getKolegije(context), type1);
-        List<StudentImaKolegij> listaStudImaKol = gson1.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), type2);
 
         if (listaSvihKolegija != null) {
             CustomAdapterOdabirKolegija odabirKolegija = new CustomAdapterOdabirKolegija(this, listaSvihKolegija);
@@ -63,7 +61,6 @@ public class OdabirKolegija extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                     for (Kolegiji kol : listaSvihKolegija) {
                         if (kol.id == position)
                             if (listView.getChildAt(position).isEnabled()) {
@@ -82,9 +79,11 @@ public class OdabirKolegija extends AppCompatActivity {
 
 
             odaberiKolegije.setOnClickListener(new View.OnClickListener() {
+                Gson gson2 = new Gson();
+                Type type2 = new TypeToken<List<StudentImaKolegij>>() {}.getType();
+                List<StudentImaKolegij> listaStaraStImaKole = gson2.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), type2);
                 List<StudentImaKolegij> studImaKolList = new ArrayList<>();
                 StudentImaKolegij stImaKol;
-
                 @Override
                 public void onClick(View v) {
                     for (int i = 0; i < listaSvihKolegija.size(); i++) {
@@ -93,7 +92,6 @@ public class OdabirKolegija extends AppCompatActivity {
                             stImaKol.idStudent = osoba.oib;
                             stImaKol.idKolegij = i;
                             studImaKolList.add(stImaKol);
-
                             Gson gson = new Gson();
                             String jsonStImKo = gson.toJson(studImaKolList);       //kreiraj gson i spremi gson u bazu
                             PreferenceManagerHelper.spremiStudentImaKolegij(jsonStImKo, context);
@@ -116,7 +114,7 @@ public class OdabirKolegija extends AppCompatActivity {
                         listView.getChildAt(kol.id).setBackgroundColor(0);
                         if (listaStudImaKol != null) {
                             for (StudentImaKolegij stImK : listaStudImaKol) {
-                                if (kol.id == stImK.idKolegij) {
+                                if (kol.id == stImK.idKolegij && stImK.idStudent == osoba.oib) {
                                     listView.getChildAt(kol.id).setEnabled(false);
                                     listView.getChildAt(kol.id).setBackgroundColor(LTGRAY);
                                 }

@@ -91,7 +91,9 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/txtOpisKolDetKol"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="20dp"
+            android:fadingEdge="horizontal"
+            android:gravity="start" />
 
     </LinearLayout>
 
@@ -116,12 +118,13 @@
             android:layout_height="match_parent"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/txtUvijetiKolDetKol" />
+            android:id="@+id/txtUvijetiKolDetKol"
+            android:gravity="fill_horizontal|start" />
 
     </LinearLayout>
 
     <Button
-        android:text="Spremi kolegij"
+        android:text="spremi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSpremiDetaljeKolegija"

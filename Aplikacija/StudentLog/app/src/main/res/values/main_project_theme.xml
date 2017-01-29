@@ -4,5 +4,5 @@
     <style name="main_app_theme">
         <item name="android:background">#E3E9F5</item>  //background color on every screen (layout)
     </style>
-
+        ///E3E9F5
 </resources>

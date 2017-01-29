@@ -28,5 +28,6 @@
         android:headerDividersEnabled="false"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="0.60" />
+        android:layout_weight="0.60"
+        android:fadingEdge="horizontal|vertical" />
 </LinearLayout>

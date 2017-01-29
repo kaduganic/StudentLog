@@ -73,6 +73,7 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/btnSpremiKreiranjeKolegija"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="20dp"
+            />
     </RelativeLayout>
 </LinearLayout>
