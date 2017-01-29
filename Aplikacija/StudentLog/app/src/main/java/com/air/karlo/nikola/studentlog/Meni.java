@@ -90,7 +90,10 @@ public class Meni extends AppCompatActivity {
             public void onClick(View v) {
                 if(osoba.uloga.equals("Profesor")){
                     //pregled dolazaka
-
+                    Intent intent = new Intent(context, PregledDolazaka.class);
+                    intent.putExtra("osoba", osoba);
+                    startActivity(intent);
+                    finish();
                 }else if(osoba.uloga.equals("Student")){
                     //prijava dolazaka
                     Intent intent = new Intent(context, PrijavaDolaska.class);

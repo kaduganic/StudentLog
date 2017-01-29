@@ -33,6 +33,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".DetaljiKolegija"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".PregledDolazaka"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

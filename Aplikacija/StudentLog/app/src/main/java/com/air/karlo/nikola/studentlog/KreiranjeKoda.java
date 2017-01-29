@@ -109,7 +109,6 @@ public class KreiranjeKoda extends AppCompatActivity{
             Type type = new TypeToken<List<Kod>>(){}.getType();
             List<Kod> listaStarihKodova = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(context), type);
             List<Kod> listaNovihKodova = new ArrayList<Kod>();
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 if (sItems.getSelectedItem() != null) {       //povjera izabranog kolegija na dropdown

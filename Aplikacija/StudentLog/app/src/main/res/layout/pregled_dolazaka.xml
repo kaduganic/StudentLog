@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/main_app_theme"
+    android:weightSum="1">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtImePrezimePregledDolazaka"
+        android:layout_weight="0.09" />
+
+    <TextView
+        android:text="Pregled dolazaka"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNaslovPregledDolazaka"
+        android:layout_weight="0.08"
+        android:textSize="36sp"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:layout_marginBottom="20dp">
+
+        <DatePicker
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:id="@+id/datePicker"
+            style="@android:style/Widget.DatePicker"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spnPopisKolegijaPregeldDolaska"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:text="Broj prisutnih studenata:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtBrojPrisutnihPregledDolazaka"
+            android:layout_weight="0.18" />
+
+        <TextView
+            android:text="/"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtBrojPrisStdPregDol"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:text="Postotak prisutnih:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtPostotakPristunihPregledDolazaka"
+            android:layout_weight="0.43" />
+
+        <TextView
+            android:text="/"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtPostoPrisStPregDol"
+            android:layout_weight="0.94" />
+    </LinearLayout>
+
+
+    <Button
+        android:text="Ucitaj podatke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUcitajPregledDolazaka"
+        android:layout_weight="0.09"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+
+</LinearLayout>
