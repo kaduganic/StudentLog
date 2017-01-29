@@ -64,7 +64,7 @@ public class DetaljiKolegija extends AppCompatActivity {
             txtOpisKolegija.setEnabled(false);
             txtOpisKolegija.setTextColor(BLACK);
         }
-        if(!kolegij.uvijeti.equals("") && !kolegij.opisKolegija.equals("")){
+        if(kolegij.uvijeti != null && kolegij.opisKolegija != null){
             txtUvijetiKolegija.setText(kolegij.uvijeti + "");
             txtOpisKolegija.setText(kolegij.opisKolegija + "");
         }
@@ -78,13 +78,18 @@ public class DetaljiKolegija extends AppCompatActivity {
                 List<Kolegiji> listaKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), type);
                 List<Kolegiji> kolegiji =  new ArrayList<Kolegiji>();
 
+                kolegij.opisKolegija = txtOpisKolegija.getText().toString();
+                kolegij.uvijeti = txtUvijetiKolegija.getText().toString();
+                boolean novi = true;
                 if(listaKolegija != null){
                 for (Kolegiji ko:listaKolegija) {
                     kolegiji.add(ko);
+                    if(ko.naziv.equals(kolegij.naziv)){
+                        kolegiji.set(kolegij.id, kolegij);
+                        novi = false;
+                    }
                 }}
-                kolegij.opisKolegija = txtOpisKolegija.getText().toString();
-                kolegij.uvijeti = txtUvijetiKolegija.getText().toString();
-                kolegiji.add(kolegij);
+                if(novi) kolegiji.add(kolegij);
 
                 String jsonKolegij = gson.toJson(kolegiji);
                 PreferenceManagerHelper.spremiKolegij(jsonKolegij,context);
