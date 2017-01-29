@@ -91,16 +91,18 @@ public class KreiranjeKolegija extends AppCompatActivity {
                         koleg.idNositelj = osoba.oib;
                         koleg.id = brojac;
                         kolegiji.add(koleg);
-                        String jsonKolegij = gson.toJson(kolegiji);
-                        PreferenceManagerHelper.spremiKolegij(jsonKolegij,context);
+
+
+                        Intent intent = new Intent(context, DetaljiKolegija.class);
+                        intent.putExtra("osoba", osoba);
+                        intent.putExtra("kolegij",koleg);
+                        startActivity(intent);
+                        finish();
                     }   else {
                         Toast.makeText(context, "Kolegij vec postoji!",
                                 Toast.LENGTH_LONG).show();
                     }
-                    Intent intent = new Intent(context, PregledKolegija.class);
-                    intent.putExtra("osoba", osoba);
-                    startActivity(intent);
-                    finish();
+
                 }
             }
         });

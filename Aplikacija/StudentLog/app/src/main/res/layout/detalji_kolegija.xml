@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/main_app_theme"
+    android:weightSum="1">
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtImePrezimeDetaljiKolegija"
+        android:layout_weight="0.08" />
+
+    <TextView
+        android:text="Detalji o kolegiju"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNaslovDetaljiKolegija"
+        android:layout_weight="0.25"
+        android:textSize="36sp"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:text="Naziv kolegija:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtNaslovKolDetaljiKolegija"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:layout_weight="0.06" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtNazivKolegijaDetaljKolegija"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <TextView
+            android:text="Ects:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtEctsDetaljiKolegija"
+            android:layout_weight="0.63"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtEctsDetKol"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_weight="0.23"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:text="Opis kolegija:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtOpisKolegijaDetaljiKolegija"
+            android:layout_weight="0.13"
+            android:textSize="18sp"
+            android:textAlignment="textStart" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/txtOpisKolDetKol"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_weight="0.24"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:text="Uvijeti kolegija:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtUvijetiDetaljiKolegija"
+            android:textSize="18sp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/txtUvijetiKolDetKol" />
+
+    </LinearLayout>
+
+    <Button
+        android:text="Spremi kolegij"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSpremiDetaljeKolegija"
+        android:layout_weight="0.08"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>

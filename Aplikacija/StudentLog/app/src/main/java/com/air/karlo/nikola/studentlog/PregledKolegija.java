@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.core.PreferenceManagerHelper;
 import com.google.gson.Gson;
@@ -19,6 +22,8 @@ import java.util.List;
 import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
 import tipoviPodatka.StudentImaKolegij;
+
+import static android.graphics.Color.LTGRAY;
 
 /**
  * Created by Nikola on 14.12.2016..
@@ -42,7 +47,7 @@ public class PregledKolegija extends AppCompatActivity {
         Gson gson = new Gson();
         Type typeKol = new TypeToken<List<Kolegiji>>(){}.getType();
         Type typeStImKol = new TypeToken<List<StudentImaKolegij>>(){}.getType();
-        List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol);
+        final List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol);
         List<Kolegiji> listaTrenutnog = new ArrayList<>();
         List<StudentImaKolegij> listStudnImaKol = gson.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), typeStImKol);
 
@@ -60,8 +65,27 @@ public class PregledKolegija extends AppCompatActivity {
             }
             CustomAdapter pregledKolegija = new CustomAdapter(this, listaTrenutnog);
 
-            ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
+            final ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
             listView.setAdapter(pregledKolegija);
+            listView.setTextFilterEnabled(true);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    listView.getChildAt(position).setEnabled(true);
+                    for (Kolegiji kol : listaSvihKolegija) {
+                        if (kol.id == position){
+                            Intent intent = new Intent(context, DetaljiKolegija.class);
+                            intent.putExtra("osoba", osoba);
+                            intent.putExtra("kolegij",kol);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                    }
+
+                }
+            });
         }
 
     }
