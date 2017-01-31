@@ -35,9 +35,10 @@ public class DetaljiKolegija extends AppCompatActivity {
 
         setContentView(R.layout.detalji_kolegija);  //spajanje aktivitia s xmlom detalji kolegija
 
-        osoba = getIntent().getExtras().getParcelable("osoba");
-        kolegij = getIntent().getExtras().getParcelable("kolegij");
+        osoba = getIntent().getExtras().getParcelable("osoba"); //dohvacanje podataka koji su poslani sa proslog aktivitia
+        kolegij = getIntent().getExtras().getParcelable("kolegij"); //dohvacanje podatak koji su poslani sa proslog aktivitia
 
+        //spajanje varijabli sa xml toolsima
         txtImePrezime = (TextView)findViewById(R.id.txtImePrezimeDetaljiKolegija);
         txtDetaljiKolegija =(TextView)findViewById(R.id.txtNazivKolegijaDetaljKolegija);
         txtEctsDetKol = (TextView)findViewById(R.id.txtEctsDetKol);
@@ -45,47 +46,49 @@ public class DetaljiKolegija extends AppCompatActivity {
         txtUvijetiKolegija = (EditText) findViewById(R.id.txtUvijetiKolDetKol);
         spremiKolegij = (Button) findViewById(R.id.btnSpremiDetaljeKolegija);
 
+        //ispis imena i prezima te naziva kolegija i ects-a
         txtImePrezime.setText(osoba.ime  + " " + osoba.prezime);
         txtDetaljiKolegija.setText(kolegij.naziv + "");
         txtEctsDetKol.setText(kolegij.ects + "");
 
-        if(osoba.uloga.equals("Student")){
-            spremiKolegij.setEnabled(false);
-            spremiKolegij.setVisibility(View.GONE);
-            txtUvijetiKolegija.setEnabled(false);
-            txtUvijetiKolegija.setTextColor(BLACK);
-            txtOpisKolegija.setEnabled(false);
-            txtOpisKolegija.setTextColor(BLACK);
-        }
-        if(kolegij.uvijeti != null && kolegij.opisKolegija != null){
-            txtUvijetiKolegija.setText(kolegij.uvijeti + "");
-            txtOpisKolegija.setText(kolegij.opisKolegija + "");
+        if(osoba.uloga.equals("Student")){      //ukoliko se ulogirao student
+            spremiKolegij.setEnabled(false);    //disable dugme spremi kolegij koje je namjenjeno profesoru
+            spremiKolegij.setVisibility(View.GONE); //ukloni dugme sa ekrana
+            txtUvijetiKolegija.setEnabled(false);   //onemoguci uredivanje uvijeta kolegija, student samo vidi ispis
+            txtUvijetiKolegija.setTextColor(BLACK); //postavi boju slova na crno
+            txtOpisKolegija.setEnabled(false);  //onemoguci uredivanje opisa kolegija, student samo vidi ispis
+            txtOpisKolegija.setTextColor(BLACK);    //postavi boju slova na crno
         }
 
-        spremiKolegij.setOnClickListener(new View.OnClickListener() {
+        if(kolegij.uvijeti != null && kolegij.opisKolegija != null){ //Ukoliko postoji neki zapis o uvijetima i opisu kolegija
+            txtUvijetiKolegija.setText(kolegij.uvijeti + "");   //Ispisi uvijete kolegija
+            txtOpisKolegija.setText(kolegij.opisKolegija + ""); //Ispisi opis kolegija
+        }
+
+        spremiKolegij.setOnClickListener(new View.OnClickListener() {   //button spremi kolegij listener
             final Context context = getApplicationContext();
             @Override
             public void onClick(View v) {
-                Gson gson = new Gson();
-                Type type = new TypeToken<List<Kolegiji>>(){}.getType();
-                List<Kolegiji> listaKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), type);
+                Gson gson = new Gson();     //gson koji sluzi za dohvat kolegija iz preferencesa
+                Type type = new TypeToken<List<Kolegiji>>(){}.getType();    //tip podatka koji dohvacamo iz preferencesa
+                List<Kolegiji> listaKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), type); //dohvat kolegija
                 List<Kolegiji> kolegiji =  new ArrayList<Kolegiji>();
 
-                kolegij.opisKolegija = txtOpisKolegija.getText().toString();
-                kolegij.uvijeti = txtUvijetiKolegija.getText().toString();
+                kolegij.opisKolegija = txtOpisKolegija.getText().toString(); //dohvati opis koji je profesor upisao i spremi ga u varijablu
+                kolegij.uvijeti = txtUvijetiKolegija.getText().toString();  //dohvati uvijete koje je profesor upisai i spremi ga u varijablu
                 boolean novi = true;
-                if(listaKolegija != null){
-                for (Kolegiji ko:listaKolegija) {
-                    kolegiji.add(ko);
-                    if(ko.naziv.equals(kolegij.naziv)){
-                        kolegiji.set(kolegij.id, kolegij);
+                if(listaKolegija != null){  //ukoliko postoji kolegij u bazi
+                for (Kolegiji ko:listaKolegija) {   //prolaz kroz sve kolegije
+                    kolegiji.add(ko);   //dodaj sve spremljene kolegije
+                    if(ko.naziv.equals(kolegij.naziv)){ //pronadi isto ime
+                        kolegiji.set(kolegij.id, kolegij);  //ukoliko je isto ime azuriraj podatke o kolegiju (opis i uvijete)
                         novi = false;
                     }
                 }}
-                if(novi) kolegiji.add(kolegij);
+                if(novi) kolegiji.add(kolegij); //ukoliko nema postojecih zapisa o kolegiju smatra se novim te se sprema
 
-                String jsonKolegij = gson.toJson(kolegiji);
-                PreferenceManagerHelper.spremiKolegij(jsonKolegij,context);
+                String jsonKolegij = gson.toJson(kolegiji);     //gson za spremanje u preferences
+                PreferenceManagerHelper.spremiKolegij(jsonKolegij,context); //spremi sve kolegije
 
                 Toast.makeText(context, "Kolegij je uspijesno spremljen.",
                         Toast.LENGTH_SHORT).show();

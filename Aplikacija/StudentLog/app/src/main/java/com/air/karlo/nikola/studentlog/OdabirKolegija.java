@@ -26,10 +26,6 @@ import tipoviPodatka.StudentImaKolegij;
 
 import static android.graphics.Color.LTGRAY;
 
-/**
- * Created by Nikola on 25.1.2017..
- */
-
 public class OdabirKolegija extends AppCompatActivity {
 
 
