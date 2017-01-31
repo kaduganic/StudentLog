@@ -36,16 +36,16 @@ public class PregledKolegija extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Context context = getApplicationContext();
-        setContentView(R.layout.pregled_kolegija);
+        setContentView(R.layout.pregled_kolegija);  //povezi sa layoutom
         osoba = new Osoba();
-        osoba = getIntent().getExtras().getParcelable("osoba");
+        osoba = getIntent().getExtras().getParcelable("osoba"); //dohvati podatke o osobi
         txtImePrezime = (TextView) findViewById(R.id.txtImePrezime);
         txtImePrezime.setText(osoba.ime  + " " + osoba.prezime);
 
-        Gson gson = new Gson();
+        Gson gson = new Gson();         //gson za dohvat iz preferencesa
         Type typeKol = new TypeToken<List<Kolegiji>>(){}.getType();
         Type typeStImKol = new TypeToken<List<StudentImaKolegij>>(){}.getType();
-        final List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol);
+        final List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol);  //dohvati kolegije
         List<Kolegiji> listaTrenutnog = new ArrayList<>();
         List<StudentImaKolegij> listStudnImaKol = gson.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), typeStImKol);
 
@@ -56,10 +56,10 @@ public class PregledKolegija extends AppCompatActivity {
                     if(osoba.uloga.equals("Student")){
                         for(StudentImaKolegij stImKo : listStudnImaKol) {
                             if (stImKo.idKolegij == kol.id && stImKo.idStudent == osoba.oib){
-                                listaTrenutnog.add(kol);
-                                Set<Kolegiji> hs = new HashSet<>();
-                                hs.addAll(listaTrenutnog);
-                                listaTrenutnog.clear();
+                                listaTrenutnog.add(kol);                //
+                                Set<Kolegiji> hs = new HashSet<>();     //
+                                hs.addAll(listaTrenutnog);              //ukloni duplikate
+                                listaTrenutnog.clear();                 //
                                 listaTrenutnog.addAll(hs);
                             }
                         }
@@ -68,7 +68,7 @@ public class PregledKolegija extends AppCompatActivity {
             CustomAdapterPregledKolegija pregledKolegija = new CustomAdapterPregledKolegija(this, listaTrenutnog);
             final ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
             listView.setAdapter(pregledKolegija);
-            listView.setTextFilterEnabled(true);
+            listView.setTextFilterEnabled(true);        //prikaz kolegij preko adaptera
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -77,10 +77,10 @@ public class PregledKolegija extends AppCompatActivity {
                     listView.getChildAt(position).setEnabled(true);
                     for (Kolegiji kol : listaSvihKolegija) {
                         if (kol.naziv == kolegijii.naziv){
-                            Intent intent = new Intent(context, DetaljiKolegija.class);
-                            intent.putExtra("osoba", osoba);
-                            intent.putExtra("kolegij",kol);
-                            startActivity(intent);
+                            Intent intent = new Intent(context, DetaljiKolegija.class);     //kada klikne na kolegij otvori detaljinij prikaz
+                            intent.putExtra("osoba", osoba);        //prosljedi osobe
+                            intent.putExtra("kolegij",kol);         //prosljedi kolegije
+                            startActivity(intent);                  //start aktiviti
                             finish();
                         }
 

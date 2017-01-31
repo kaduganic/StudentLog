@@ -46,7 +46,7 @@ public class PrijavaDolaska extends AppCompatActivity{
 
     Osoba osoba;
     DatePicker datum;
-    DohvacanjeKodaInterface dohvacanjeKodaDolaska;
+    DohvacanjeKodaInterface dohvacanjeKodaDolaska;      //interface za modularno
     Button btnSkenirajQR, btnPrijaviDolazak, btnUnesiRucnoKod;
     TextView edTxtKodDolaska;
     List<Dolasci> listaStarihDolazaka;
@@ -55,10 +55,10 @@ public class PrijavaDolaska extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Context context = this;
-        setContentView(R.layout.prijava_dolaska);
+        setContentView(R.layout.prijava_dolaska); //povezi sa layoutom
         final Activity activity = this;
         osoba = new Osoba();
-        osoba = getIntent().getExtras().getParcelable("osoba");
+        osoba = getIntent().getExtras().getParcelable("osoba");     //dohvati podatke o osobi trenutno ulogiranoj
 
         datum = (DatePicker) findViewById(R.id.dtIzaberiDatumPrijavaDolaska);
         btnSkenirajQR = (Button)findViewById(R.id.btnSkenirajQRPrijavaDolaska);
@@ -71,18 +71,18 @@ public class PrijavaDolaska extends AppCompatActivity{
 
         btnUnesiRucnoKod.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {           //rucni unos koda
 
-                dohvacanjeKodaDolaska = new dohvatRucnoUnesenihSifri();
+                dohvacanjeKodaDolaska = new dohvatRucnoUnesenihSifri(); //modularno za rucno unesene sifre
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);   //stvori dialog za unos
                 final EditText edittext = new EditText(context);
                 alert.setMessage("Unesite kod u prostor ispod.");
                 alert.setTitle("Prijava dolaska putem koda.");
                 alert.setView(edittext);
                 alert.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        edTxtKodDolaska.setText(edittext.getText().toString());
+                        edTxtKodDolaska.setText(edittext.getText().toString());         //ukoliko je unesao omoguci button za prijavu
                         btnPrijaviDolazak.setEnabled(true);
                     }
                 });
@@ -99,8 +99,9 @@ public class PrijavaDolaska extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                dohvacanjeKodaDolaska = new dohvacanjeQRSifri();
+                dohvacanjeKodaDolaska = new dohvacanjeQRSifri();        //modularno za qr kodove
 
+                //pokreni kameru i skener za qr kod
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("Skeniraj");
@@ -114,23 +115,23 @@ public class PrijavaDolaska extends AppCompatActivity{
         });
 
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<Dolasci>>(){}.getType();
-        listaStarihDolazaka = gson.fromJson(PreferenceManagerHelper.getDolasci(context), type);
+        Gson gson = new Gson(); //za dohvat iz prefrencesa
+        Type type = new TypeToken<List<Dolasci>>(){}.getType(); //tip podakta koji se dohvaca
+        listaStarihDolazaka = gson.fromJson(PreferenceManagerHelper.getDolasci(context), type); //dohvati dolaske
         final List<Dolasci> listaNovihDolazaka = new ArrayList<>();
 
         btnPrijaviDolazak.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {       //prijavi dolazak
                 if (edTxtKodDolaska.getText().toString().matches("")) {
                     Toast.makeText(context, "Unesite kod dolaska!", Toast.LENGTH_SHORT).show();
                 } else {
-                    dohvacanjeKodaDolaska.dohvacanjeKoda(new DohvacanjeKodaListener() {
+                    dohvacanjeKodaDolaska.dohvacanjeKoda(new DohvacanjeKodaListener() { //modularno - metoda za dohvacanje sifri ovisno o unosu
                         List<Kod> listaSvihKodova = new ArrayList<Kod>();
-                        int day = datum.getDayOfMonth();
+                        int day = datum.getDayOfMonth();        //dohvati datum
                         int month = datum.getMonth();
                         int year = datum.getYear();
-                        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+                        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy"); //format datuma
                         String datumDolaskaStudenta = sdf.format(new Date(year, month, day));
                         Dolasci dolasci = new Dolasci();
 
@@ -138,20 +139,20 @@ public class PrijavaDolaska extends AppCompatActivity{
                         public void DohvaceniKod(List<Kod> dohvatKoda) {
                             Boolean statusDolaska = false;
                             listaSvihKodova = dohvatKoda;
-                            if (listaStarihDolazaka == null) {
-                                for (Kod k : listaSvihKodova) {
-                                    if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) {
-                                        dolasci.idKolegija = k.idKolegija;
-                                        dolasci.idStudenta = osoba.oib;
-                                        dolasci.datum = datumDolaskaStudenta;
-                                        listaNovihDolazaka.add(dolasci);
+                            if (listaStarihDolazaka == null) { //ukoliko postoje dolasci
+                                for (Kod k : listaSvihKodova) {     //prodi kroz sve kodove
+                                    if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) {  //pronadi sifru i datum za studenta
+                                        dolasci.idKolegija = k.idKolegija;  //spremi id kolegija
+                                        dolasci.idStudenta = osoba.oib;     //spremi id osobe
+                                        dolasci.datum = datumDolaskaStudenta; //spremi datum
+                                        listaNovihDolazaka.add(dolasci);        //dodaj u listu
                                         Set<Dolasci> hs = new HashSet<>();
-                                        hs.addAll(listaNovihDolazaka);
+                                        hs.addAll(listaNovihDolazaka);          //ukloni duplikate
                                         listaNovihDolazaka.clear();
                                         listaNovihDolazaka.addAll(hs);
-                                        Gson gson = new Gson();
+                                        Gson gson = new Gson();                 //za spremanje dolazaka
                                         String jsonDolaska = gson.toJson(listaNovihDolazaka);
-                                        PreferenceManagerHelper.spremiDolaske(jsonDolaska, context);
+                                        PreferenceManagerHelper.spremiDolaske(jsonDolaska, context);    //spremi dolaske
                                         Toast.makeText(context, "Dolazak je uspijesno prijavljen.", Toast.LENGTH_SHORT).show();
 
                                         break;
@@ -161,22 +162,22 @@ public class PrijavaDolaska extends AppCompatActivity{
                                 if (listaSvihKodova != null) {
                                     for (Kod k : listaSvihKodova) {
                                             listaNovihDolazaka.addAll(listaStarihDolazaka); //prepisemo dosadanje dolaske studenta
-                                            Set<Dolasci> hss = new HashSet<>();
-                                            hss.addAll(listaNovihDolazaka);
-                                            listaNovihDolazaka.clear();
-                                            listaNovihDolazaka.addAll(hss);
+                                            Set<Dolasci> hss = new HashSet<>();     //
+                                            hss.addAll(listaNovihDolazaka);         //ukloni duplikate
+                                            listaNovihDolazaka.clear();             //
+                                            listaNovihDolazaka.addAll(hss);         //
                                             if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) { //provjera dal se vec upisao
                                                     dolasci.idKolegija = k.idKolegija;
                                                     dolasci.idStudenta = osoba.oib;
                                                     dolasci.datum = datumDolaskaStudenta;
                                                     Set<Dolasci> hs = new HashSet<>();
-                                                    hs.addAll(listaNovihDolazaka);
-                                                    listaNovihDolazaka.clear();
+                                                    hs.addAll(listaNovihDolazaka);      //ukloni duplikate
+                                                    listaNovihDolazaka.clear();         //ukloni duplikate
                                                     listaNovihDolazaka.addAll(hs);
                                                     listaNovihDolazaka.add(dolasci);
-                                                    Gson gson = new Gson();
+                                                    Gson gson = new Gson();     //za spremanje dolazaka
                                                     String jsonDolaska = gson.toJson(listaNovihDolazaka);
-                                                    PreferenceManagerHelper.spremiDolaske(jsonDolaska, context);
+                                                    PreferenceManagerHelper.spremiDolaske(jsonDolaska, context); //spremi dolaske
                                                     Toast.makeText(context, "Dolazak je uspijesno prijavljen.", Toast.LENGTH_SHORT).show();
                                                     statusDolaska = false;
                                                     break;

@@ -39,10 +39,10 @@ public class PregledDolazaka extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pregled_dolazaka);
+        setContentView(R.layout.pregled_dolazaka);  //povezivanje sa layoutom
         final Context context = this;
         osoba = new Osoba();
-        osoba = getIntent().getExtras().getParcelable("osoba");
+        osoba = getIntent().getExtras().getParcelable("osoba");     //dohvati sve podatke o osobi ulogiranoj
 
         txtPopisOsoba = (TextView)findViewById(R.id.txtPopisOsobaPregledDolazaka);
         txtKorisnik = (TextView) findViewById(R.id.txtImePrezimePregledDolazaka) ;
@@ -55,8 +55,8 @@ public class PregledDolazaka extends AppCompatActivity {
 
         Gson gson = new Gson();
         Type typeKol = new TypeToken<List<Kolegiji>>(){}.getType();        //dohvacanje podataka iz lokalne baze
-        Type typeStu = new TypeToken<List<Osoba>>(){}.getType();
-        final List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol);
+        Type typeStu = new TypeToken<List<Osoba>>(){}.getType();            //dohvacanje podataka iz lokalne baze
+        final List<Kolegiji> listaSvihKolegija = gson.fromJson(PreferenceManagerHelper.getKolegije(context), typeKol); //dohvacanje podataka iz lokalne baze
         final List<String> listaTrenutnog = new ArrayList<>();
         Type typeDols = new TypeToken<List<Dolasci>>(){}.getType();
         final List<Dolasci> listaDolazaka = gson.fromJson(PreferenceManagerHelper.getDolasci(context), typeDols);
@@ -66,42 +66,42 @@ public class PregledDolazaka extends AppCompatActivity {
         final List<String> naziviKolStImaKol = new ArrayList<>();
 
         if(listaDolazaka != null){
-            Set<Dolasci> hs = new HashSet<>();
-            hs.addAll(listaDolazaka);
-            listaDolazaka.clear();
-            listaDolazaka.addAll(hs);
+            Set<Dolasci> hs = new HashSet<>();  //
+            hs.addAll(listaDolazaka);           //ukloni duplikate
+            listaDolazaka.clear();              //
+            listaDolazaka.addAll(hs);           //
         }
 
 
-        Type typeStIKol = new TypeToken<List<StudentImaKolegij>>(){}.getType();
+        Type typeStIKol = new TypeToken<List<StudentImaKolegij>>(){}.getType();     //dohvati studente iz prefernecesa
         final List<StudentImaKolegij> listaStudImaKol = gson.fromJson(PreferenceManagerHelper.getStudentImaKoleg(context), typeStIKol);
         if(listaStudImaKol != null){
-            Set<StudentImaKolegij> hss = new HashSet<>();
-            hss.addAll(listaStudImaKol);
-            listaStudImaKol.clear();
-            listaStudImaKol.addAll(hss);
+            Set<StudentImaKolegij> hss = new HashSet<>();   //ukloni duplikate
+            hss.addAll(listaStudImaKol);                    //
+            listaStudImaKol.clear();                        //
+            listaStudImaKol.addAll(hss);                    //
         }
 
-        if(listaSvihKolegija != null) {
-            for (Kolegiji kol : listaSvihKolegija) {
+        if(listaSvihKolegija != null) {                     //ako postoje kolegiji
+            for (Kolegiji kol : listaSvihKolegija) {        //za sve kolegije
                 if (kol.idNositelj == osoba.oib){
-                    listaTrenutnog.add(kol.naziv);
+                    listaTrenutnog.add(kol.naziv);          //dodaj kolegije
                 }
                 if(listaDolazaka != null){
                     for (Dolasci dolasci:listaDolazaka) {
                         if (kol.id == dolasci.idKolegija){
                             naziviKolegija.add(kol.naziv);
                             Set<String> hss = new HashSet<>();
-                            hss.addAll(naziviKolegija);
+                            hss.addAll(naziviKolegija);         //ukloni duplikate
                             naziviKolegija.clear();
                             naziviKolegija.addAll(hss);
                         }
                     }
                 }
 
-                if(listaStudImaKol != null){
+                if(listaStudImaKol != null){        //ako student ima kolegije
                     for (StudentImaKolegij stImaKol:listaStudImaKol) {
-                        if (kol.id == stImaKol.idKolegij){
+                        if (kol.id == stImaKol.idKolegij){  //spremi nazive gdje je id kolegija = st kojim kolegij
                             naziviKolStImaKol.add(kol.naziv);
                         }
                     }
@@ -111,7 +111,7 @@ public class PregledDolazaka extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaTrenutnog);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner sItems = (Spinner) findViewById(R.id.spnPopisKolegijaPregeldDolaska);
-        sItems.setAdapter(adapter);
+        sItems.setAdapter(adapter);     //napuni spinner kolegijima
 
         ucitajPodatke.setOnClickListener(new View.OnClickListener() {
 
@@ -120,21 +120,21 @@ public class PregledDolazaka extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int   day  = datum.getDayOfMonth();
-                int   month= datum.getMonth();
+                int   month= datum.getMonth();          //datum
                 int   year = datum.getYear();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                datm = sdf.format(new Date(year, month, day));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");  //format datuma
+                datm = sdf.format(new Date(year, month, day));              //spremi datum u varijablu
                 if(listaDolazaka != null && naziviKolStImaKol != null){
                     for (Dolasci ds:listaDolazaka) {
                         for (String s:naziviKolegija) {
                             if(ds.datum.equals(datm) && s.equals(sItems.getSelectedItem().toString())){
-                                pristuniStudenti++;
+                                pristuniStudenti++;     //brojac za sve studente koji su dosli na taj datum i kolegij
                             }
                         }
                     }
                     for (String s:naziviKolStImaKol) {
                         if(s.equals(sItems.getSelectedItem().toString())){
-                            sviStudenti++;
+                            sviStudenti++;  //prebroji sve studente
                         }
                     }
                 }else Toast.makeText(context, "Nema dolazaka!", Toast.LENGTH_SHORT).show();
@@ -143,13 +143,13 @@ public class PregledDolazaka extends AppCompatActivity {
                     for (Osoba s:listaOsoba) {
                         if(i.idStudenta == s.oib){
                             txtPopisOsoba.append(s.ime + " " + s.prezime);
-                            txtPopisOsoba.append("\n");
+                            txtPopisOsoba.append("\n");     //popis studenata
                         }
                     }
                 }
 
                 txtBrojDolaska.setText(pristuniStudenti + "");
-                double rezultat = ((((double)pristuniStudenti))/(double)sviStudenti)*100;
+                double rezultat = ((((double)pristuniStudenti))/(double)sviStudenti)*100;   //postotak studenata
                 txtPostotakDolaska.setText(String.format( "%.2f", rezultat ) + "% dolaska");
                 pristuniStudenti = 0;
                 sviStudenti = 0;
