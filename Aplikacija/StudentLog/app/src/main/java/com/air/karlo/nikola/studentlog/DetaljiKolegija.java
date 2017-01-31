@@ -10,23 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.core.PreferenceManagerHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
 
 import static android.graphics.Color.BLACK;
-
-/**
- * Created by Nikola on 29.1.2017..
- */
 
 public class DetaljiKolegija extends AppCompatActivity {
 
@@ -40,7 +33,7 @@ public class DetaljiKolegija extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.detalji_kolegija);
+        setContentView(R.layout.detalji_kolegija);  //spajanje aktivitia s xmlom detalji kolegija
 
         osoba = getIntent().getExtras().getParcelable("osoba");
         kolegij = getIntent().getExtras().getParcelable("kolegij");

@@ -1,9 +1,6 @@
 package tipoviPodatka;
 
-/**
- * Created by Nikola on 25.1.2017..
- */
-
+//Klasa koja definira koji student ima koji kolegij
 public class StudentImaKolegij {
 
     public StudentImaKolegij(){}

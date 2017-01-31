@@ -20,12 +20,14 @@ public class Meni extends AppCompatActivity {
 
     Osoba osoba;
     Button btnKolegij,btnPregKol,btnDolasci,btnQRKod;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.meni);
+        setContentView(R.layout.meni); //pronalazi layout
+
         osoba = new Osoba();
-        osoba = getIntent().getExtras().getParcelable("osoba");
+        osoba = getIntent().getExtras().getParcelable("osoba"); //preuzimanje dobivenih podataka o osobi
 
         TextView txtKorisnik = (TextView) findViewById(R.id.txtKorisnik) ;
         btnKolegij = (Button)findViewById(R.id.btnKolegij);
@@ -33,7 +35,9 @@ public class Meni extends AppCompatActivity {
         btnDolasci = (Button)findViewById(R.id.btnDolasci);
         btnQRKod = (Button)findViewById(R.id.btnQRkod);
 
-        txtKorisnik.setText(osoba.ime  + " " + osoba.prezime);
+        txtKorisnik.setText(osoba.ime  + " " + osoba.prezime);  //ispis prijavljenog korisnika
+
+        //ovisno o pravima prikazi buttone
         if(osoba.uloga.equals("Profesor")){
             btnKolegij.setText("Kreiranje kolegija");
             btnPregKol.setText("Pregled kolegija");
@@ -50,19 +54,22 @@ public class Meni extends AppCompatActivity {
 
     private void addListenerToButton(){
         final Context context = getApplicationContext();
+
         btnKolegij.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, KreiranjeKolegija.class);
-                Intent intentst = new Intent(context, OdabirKolegija.class);
+
+                Intent intentPr = new Intent(context, KreiranjeKolegija.class);
+                Intent intentSt = new Intent(context, OdabirKolegija.class);
+
                 if(osoba.uloga.equals("Profesor")){
-                    intent.putExtra("osoba", osoba);
-                    startActivity(intent);
+                    intentPr.putExtra("osoba", osoba);
+                    startActivity(intentPr);
                     finish();
                 }else if(osoba.uloga.equals("Student")){
                     //odabir kolegija
-                    intentst.putExtra("osoba", osoba);
-                    startActivity(intentst);
+                    intentSt.putExtra("osoba", osoba);
+                    startActivity(intentSt);
                     finish();
                 }
             }

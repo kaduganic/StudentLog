@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import tipoviPodatka.Kod;
 
-/**
- * Created by Nikola on 28.1.2017..
- */
-
 public class dohvatRucnoUnesenihSifri implements DohvacanjeKodaInterface {
 
     @Override
@@ -24,6 +20,7 @@ public class dohvatRucnoUnesenihSifri implements DohvacanjeKodaInterface {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Kod>>(){}.getType();
         List<Kod> kodovi = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(c), type);
+
         List<Kod> rucnoUneseniKodovi = new ArrayList<>();
 
         for (Kod k: kodovi) {
@@ -31,7 +28,6 @@ public class dohvatRucnoUnesenihSifri implements DohvacanjeKodaInterface {
                 rucnoUneseniKodovi.add(k);
             }
         }
-
 
         listener.DohvaceniKod(rucnoUneseniKodovi);
     }

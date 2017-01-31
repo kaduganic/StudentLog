@@ -27,19 +27,20 @@ import com.google.zxing.integration.android.IntentResult;
 import java.lang.reflect.Type;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import dohvacanjePodataka.dohvacanjeQRSifri;
 import dohvacanjePodataka.dohvatRucnoUnesenihSifri;
 import tipoviPodatka.Dolasci;
 import tipoviPodatka.Kod;
+import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
 
 import static android.graphics.Color.GRAY;
 import static android.graphics.Color.LTGRAY;
 
-/**
- * Created by Nikola on 27.1.2017..
- */
 
 public class PrijavaDolaska extends AppCompatActivity{
 
@@ -144,6 +145,10 @@ public class PrijavaDolaska extends AppCompatActivity{
                                         dolasci.idStudenta = osoba.oib;
                                         dolasci.datum = datumDolaskaStudenta;
                                         listaNovihDolazaka.add(dolasci);
+                                        Set<Dolasci> hs = new HashSet<>();
+                                        hs.addAll(listaNovihDolazaka);
+                                        listaNovihDolazaka.clear();
+                                        listaNovihDolazaka.addAll(hs);
                                         Gson gson = new Gson();
                                         String jsonDolaska = gson.toJson(listaNovihDolazaka);
                                         PreferenceManagerHelper.spremiDolaske(jsonDolaska, context);
@@ -155,12 +160,19 @@ public class PrijavaDolaska extends AppCompatActivity{
                             } else {
                                 if (listaSvihKodova != null) {
                                     for (Kod k : listaSvihKodova) {
-                                        for (Dolasci ds : listaStarihDolazaka) {
-                                            listaNovihDolazaka.add(ds); //prepisemo dosadanje dolaske studenta
+                                            listaNovihDolazaka.addAll(listaStarihDolazaka); //prepisemo dosadanje dolaske studenta
+                                            Set<Dolasci> hss = new HashSet<>();
+                                            hss.addAll(listaNovihDolazaka);
+                                            listaNovihDolazaka.clear();
+                                            listaNovihDolazaka.addAll(hss);
                                             if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) { //provjera dal se vec upisao
                                                     dolasci.idKolegija = k.idKolegija;
                                                     dolasci.idStudenta = osoba.oib;
                                                     dolasci.datum = datumDolaskaStudenta;
+                                                    Set<Dolasci> hs = new HashSet<>();
+                                                    hs.addAll(listaNovihDolazaka);
+                                                    listaNovihDolazaka.clear();
+                                                    listaNovihDolazaka.addAll(hs);
                                                     listaNovihDolazaka.add(dolasci);
                                                     Gson gson = new Gson();
                                                     String jsonDolaska = gson.toJson(listaNovihDolazaka);
@@ -169,7 +181,6 @@ public class PrijavaDolaska extends AppCompatActivity{
                                                     statusDolaska = false;
                                                     break;
                                                 } else statusDolaska = true;
-                                            }
                                         }
                                     }
                                 }

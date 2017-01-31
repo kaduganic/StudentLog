@@ -14,10 +14,6 @@ import java.util.List;
 
 import tipoviPodatka.Kod;
 
-/**
- * Created by Nikola on 28.1.2017..
- */
-
 public class dohvacanjeQRSifri implements DohvacanjeKodaInterface {
     @Override
     public void dohvacanjeKoda(DohvacanjeKodaListener listener, Context c) {
@@ -25,6 +21,7 @@ public class dohvacanjeQRSifri implements DohvacanjeKodaInterface {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Kod>>(){}.getType();
         List<Kod> kodovi = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(c), type);
+
         List<Kod> qrUneseniKodovi = new ArrayList<>();
 
         for (Kod k: kodovi) {

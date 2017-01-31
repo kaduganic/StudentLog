@@ -86,6 +86,10 @@ public class OdabirKolegija extends AppCompatActivity {
                 StudentImaKolegij stImaKol;
                 @Override
                 public void onClick(View v) {
+                    if(listaStaraStImaKole != null)
+                    for (StudentImaKolegij stIK:listaStaraStImaKole) {
+                        studImaKolList.add(stIK);
+                    }
                     for (int i = 0; i < listaSvihKolegija.size(); i++) {
                         stImaKol = new StudentImaKolegij();
                         if (!listView.getChildAt(i).isEnabled()) {           //spremi sve odabrane kolegije sa liste

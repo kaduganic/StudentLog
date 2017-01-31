@@ -3,11 +3,8 @@ package tipoviPodatka;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Nikola on 10.11.2016..
- */
-
-public class Osoba implements Parcelable {
+//Klasa definiranja tipa podataka za osobe
+public class Osoba implements Parcelable { //klasa implementira "parcalable"  kako bi se podaci medu aktivnostima mogli slati
 
     public int oib;
     public String ime;
@@ -27,6 +24,8 @@ public class Osoba implements Parcelable {
         uloga = in.readString();
     }
 
+
+    //Omogucava komunikaciju izmedu aktivitija
     public static final Creator<Osoba> CREATOR = new Creator<Osoba>() {
         @Override
         public Osoba createFromParcel(Parcel in) {

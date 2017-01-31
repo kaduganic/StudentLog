@@ -20,7 +20,6 @@ import java.util.List;
 
 import tipoviPodatka.Osoba;
 
-
 public class Registracija extends AppCompatActivity {
 
     TextView oib,ime,prezime, korime,lozinka;
@@ -29,11 +28,11 @@ public class Registracija extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registracija);
+        setContentView(R.layout.registracija);  //spajanje aktivitia sa xmlom registracija
 
         addListenerToButton();
 
-
+        //dohvacamo textViewove sa layouta
         oib=(TextView)findViewById(R.id.txtoib);
         ime=(TextView)findViewById(R.id.txtIme);
         prezime=(TextView)findViewById(R.id.txtPrezime);
@@ -52,6 +51,7 @@ public class Registracija extends AppCompatActivity {
                 Osoba osoba = new Osoba();
                 Boolean regisOk = true;
 
+                //validacije podataka
                 if(oib.getText() != null){
                     try {
                         osoba.oib = Integer.parseInt(oib.getText().toString());
@@ -106,24 +106,26 @@ public class Registracija extends AppCompatActivity {
                             regisOk = false;
                 }//lozinka
 
+                //dohvacanje iz baze  vec registrirane osobe
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<Osoba>>(){}.getType();
                 List<Osoba> listaOsoba = gson.fromJson(PreferenceManagerHelper.getOsobe(context), type);
-                List<Osoba> osobe =  new ArrayList<Osoba>();
+                //
+                List<Osoba> osobe =  new ArrayList<Osoba>();    //sluzi za spremanje liste postojecih podataka
                 if(listaOsoba != null){
-                    for (Osoba os:listaOsoba) {
-                        osobe.add(os);
-                        if(os.korime.equals(osoba.korime)){
+                    for (Osoba os:listaOsoba) { //cita stare osobe spremljene u bazi
+                        osobe.add(os);          //sprema stare osobe
+                        if(os.korime.equals(osoba.korime)){ //provjera da li postoji vec ta osoba u bazi
                             regisOk = false;
                             break;
                         }
                     }
                 }
 
-                if(regisOk){
-                    osobe.add(osoba);
-                    String jsonOsobe = gson.toJson(osobe);
-                    PreferenceManagerHelper.spremiOsoba(jsonOsobe,context);
+                if(regisOk){ //ako je sve proslo dobro spremi
+                    osobe.add(osoba);      //dodajemo novu osobu
+                    String jsonOsobe = gson.toJson(osobe);  //kreiramo string jsona
+                    PreferenceManagerHelper.spremiOsoba(jsonOsobe,context); //spremamo u bazu
                     closeRegOpenPrij();
                 }   else {
                     Toast.makeText(context, "Korisnicko ime vec postoji!",

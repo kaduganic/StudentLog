@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.core.PreferenceManagerHelper;
 import com.google.gson.Gson;
@@ -24,8 +23,6 @@ import java.util.Set;
 import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
 import tipoviPodatka.StudentImaKolegij;
-
-import static android.graphics.Color.LTGRAY;
 
 /**
  * Created by Nikola on 14.12.2016..
@@ -68,10 +65,7 @@ public class PregledKolegija extends AppCompatActivity {
                         }
                 }
             }
-            CustomAdapter pregledKolegija = new CustomAdapter(this, listaTrenutnog);
-
-
-
+            CustomAdapterPregledKolegija pregledKolegija = new CustomAdapterPregledKolegija(this, listaTrenutnog);
             final ListView listView = (ListView) findViewById(R.id.lstPregledKolegija);
             listView.setAdapter(pregledKolegija);
             listView.setTextFilterEnabled(true);

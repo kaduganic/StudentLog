@@ -2,10 +2,7 @@ package tipoviPodatka;
 
 import java.util.Date;
 
-/**
- * Created by Nikola on 28.1.2017..
- */
-
+//Klasa definiranja tipa podataka za dolaske, definira se id kolegija, id studenta i datum dolaska
 public class Dolasci {
 
     public Dolasci() {}

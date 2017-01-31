@@ -5,10 +5,7 @@ import android.graphics.drawable.Drawable;
 
 import java.sql.Date;
 
-/**
- * Created by Nikola on 27.1.2017..
- */
-
+//Klasa definiranja tipa podataka za kod dolaska, profesor koji je kreirao kod, kolegij, sifra i qr kod ukoliko postoji i datum
 public class Kod {
 
     public int  idProfesora;

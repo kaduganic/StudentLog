@@ -4,11 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 
-/**
- * Created by Nikola on 1.12.2016..
- */
-
-public class Kolegiji implements Parcelable {
+//Klasa definiranja tipa podataka za kolegije
+public class Kolegiji implements Parcelable {   //klasa implementira "parcalable"  kako bi se podaci medu aktivnostima mogli slati
 
     public Kolegiji(){}
 
@@ -35,23 +32,22 @@ public class Kolegiji implements Parcelable {
         uvijeti = in.readString();
     }
 
+
+    //Omogucava komunikaciju izmedu aktivitija
     public static final Creator<Kolegiji> CREATOR = new Creator<Kolegiji>() {
         @Override
         public Kolegiji createFromParcel(Parcel in) {
             return new Kolegiji(in);
         }
-
         @Override
         public Kolegiji[] newArray(int size) {
             return new Kolegiji[size];
         }
     };
-
     @Override
     public int describeContents() {
         return 0;
     }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);

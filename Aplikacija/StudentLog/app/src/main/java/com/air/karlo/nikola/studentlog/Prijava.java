@@ -19,16 +19,15 @@ import java.util.List;
 
 import tipoviPodatka.Osoba;
 
-
 public class Prijava extends AppCompatActivity {
 
     TextView korisnickoIme,lozinka;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prijava);
+        setContentView(R.layout.prijava); //povezivanje sa xmlom prijava
+
         addListenerToButton();
         korisnickoIme = (TextView) findViewById(R.id.txtKorIme);
         lozinka = (TextView)findViewById(R.id.txtLozinka);
@@ -36,39 +35,42 @@ public class Prijava extends AppCompatActivity {
 
     public void addListenerToButton() {
         final Context context = getApplicationContext();
+
         Button registracija = (Button) findViewById(R.id.registration_button);
         Button prijava = (Button) findViewById(R.id.btnPrijava);
-        final Osoba osob = new Osoba();
-        final ArrayList<Osoba> osobe = new ArrayList<>();
 
         registracija.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Registracija.class);
-                startActivity(intent);
-                finish();
+                Intent intent = new Intent(context, Registracija.class); //priprema aktivitia koja se otvara
+                startActivity(intent);  //otvori aktiviti
+                finish();   //zatvori trenutni ekran
             }
         });
         prijava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Meni.class);
+                Intent intent = new Intent(context, Meni.class); //
+
+                //dohvacanje iz baze
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<Osoba>>(){}.getType();
                 List<Osoba> osobe = gson.fromJson(PreferenceManagerHelper.getOsobe(context), type);
+                //
 
                 final String kIme = korisnickoIme.getText().toString();
                 final String loz = lozinka.getText().toString();
-                boolean statusPronadenog = true , statusPopunjenosti = true;
-                if(osobe != null){
-                    for (Osoba os:osobe) {
-                        if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){
-                            intent.putExtra("osoba", os);
-                            startActivity(intent);
-                            finish();
+                boolean statusPronadenog = true;
+
+                if(osobe != null){  //ako postoje osobe
+                    for (Osoba os:osobe) { //prodi sve trenutne osobe
+                        if(os.korime.equals(kIme)  && os.lozinka.equals(loz)){  //ako je sifra dobra i ako je sifra dobra
+                            intent.putExtra("osoba", os);      //prosljedi ulogiranu osobu na sljedeci ekran
+                            startActivity(intent);  //pokreni aktivnost meni
+                            finish();               //ugasi trenutni aktiviti
                             statusPronadenog = false;
                             break;
-                        }else statusPronadenog = true;
+                        }else statusPronadenog = true;  //nije pronaden korisnik
                     }
                     if(statusPronadenog) Toast.makeText(context, "Korisnik ne postoji!",Toast.LENGTH_SHORT).show();
                 }
