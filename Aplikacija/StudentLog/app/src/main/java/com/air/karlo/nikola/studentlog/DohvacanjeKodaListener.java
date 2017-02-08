@@ -4,5 +4,5 @@ import tipoviPodatka.Kod;
 
 
 public interface DohvacanjeKodaListener {
-    void DohvaceniKod(List<Kod> dohvatKoda);
+    void DohvaceniKod(String dohvatKoda);
 }

@@ -38,9 +38,6 @@ import tipoviPodatka.Kod;
 import tipoviPodatka.Kolegiji;
 import tipoviPodatka.Osoba;
 
-/**
- * Created by Nikola on 27.1.2017..
- */
 
 public class KreiranjeKoda extends AppCompatActivity{
 

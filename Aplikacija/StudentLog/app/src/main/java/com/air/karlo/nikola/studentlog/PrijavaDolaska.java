@@ -72,44 +72,15 @@ public class PrijavaDolaska extends AppCompatActivity{
         btnUnesiRucnoKod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {           //rucni unos koda
-
                 dohvacanjeKodaDolaska = new dohvatRucnoUnesenihSifri(); //modularno za rucno unesene sifre
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);   //stvori dialog za unos
-                final EditText edittext = new EditText(context);
-                alert.setMessage("Unesite kod u prostor ispod.");
-                alert.setTitle("Prijava dolaska putem koda.");
-                alert.setView(edittext);
-                alert.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        edTxtKodDolaska.setText(edittext.getText().toString());         //ukoliko je unesao omoguci button za prijavu
-                        btnPrijaviDolazak.setEnabled(true);
-                    }
-                });
-                alert.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {}
-                });
-                alert.show();
-
-
+                btnPrijaviDolazak.setEnabled(true);
             }
         });
 
         btnSkenirajQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dohvacanjeKodaDolaska = new dohvacanjeQRSifri();        //modularno za qr kodove
-
-                //pokreni kameru i skener za qr kod
-                IntentIntegrator integrator = new IntentIntegrator(activity);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Skeniraj");
-                integrator.setCameraId(0);
-                integrator.setBeepEnabled(false);
-                integrator.setBarcodeImageEnabled(false);
-                integrator.initiateScan();
-
                 btnPrijaviDolazak.setEnabled(true);
             }
         });
@@ -126,19 +97,26 @@ public class PrijavaDolaska extends AppCompatActivity{
                 if (edTxtKodDolaska.getText().toString().matches("")) {
                     Toast.makeText(context, "Unesite kod dolaska!", Toast.LENGTH_SHORT).show();
                 } else {
-                    dohvacanjeKodaDolaska.dohvacanjeKoda(new DohvacanjeKodaListener() { //modularno - metoda za dohvacanje sifri ovisno o unosu
-                        List<Kod> listaSvihKodova = new ArrayList<Kod>();
-                        int day = datum.getDayOfMonth();        //dohvati datum
-                        int month = datum.getMonth();
-                        int year = datum.getYear();
-                        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy"); //format datuma
-                        String datumDolaskaStudenta = sdf.format(new Date(year, month, day));
-                        Dolasci dolasci = new Dolasci();
-
+                    dohvacanjeKodaDolaska.dohvacanjeKoda(new DohvacanjeKodaListener() {
                         @Override
-                        public void DohvaceniKod(List<Kod> dohvatKoda) {
+                        public void DohvaceniKod(String dohvatKoda) {
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<List<Kod>>(){}.getType();
+                            List<Kod> kodovi = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(context), type);
+                            List<Kod> listaSvihKodova = new ArrayList<Kod>();
+                            for (Kod k: kodovi) {
+                            if(k.qrImage != null){
+                            listaSvihKodova.add(k);
+                            }
+                            }
+                            int day = datum.getDayOfMonth();        //dohvati datum
+                            int month = datum.getMonth();
+                            int year = datum.getYear();
+                            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy"); //format datuma
+                            String datumDolaskaStudenta = sdf.format(new Date(year, month, day));
+                            Dolasci dolasci = new Dolasci();
                             Boolean statusDolaska = false;
-                            listaSvihKodova = dohvatKoda;
+                            edTxtKodDolaska.setText(dohvatKoda);
                             if (listaStarihDolazaka == null) { //ukoliko postoje dolasci
                                 for (Kod k : listaSvihKodova) {     //prodi kroz sve kodove
                                     if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) {  //pronadi sifru i datum za studenta
@@ -150,8 +128,8 @@ public class PrijavaDolaska extends AppCompatActivity{
                                         hs.addAll(listaNovihDolazaka);          //ukloni duplikate
                                         listaNovihDolazaka.clear();
                                         listaNovihDolazaka.addAll(hs);
-                                        Gson gson = new Gson();                 //za spremanje dolazaka
-                                        String jsonDolaska = gson.toJson(listaNovihDolazaka);
+                                        Gson gson1 = new Gson();                 //za spremanje dolazaka
+                                        String jsonDolaska = gson1.toJson(listaNovihDolazaka);
                                         PreferenceManagerHelper.spremiDolaske(jsonDolaska, context);    //spremi dolaske
                                         Toast.makeText(context, "Dolazak je uspijesno prijavljen.", Toast.LENGTH_SHORT).show();
 
@@ -161,52 +139,36 @@ public class PrijavaDolaska extends AppCompatActivity{
                             } else {
                                 if (listaSvihKodova != null) {
                                     for (Kod k : listaSvihKodova) {
-                                            listaNovihDolazaka.addAll(listaStarihDolazaka); //prepisemo dosadanje dolaske studenta
-                                            Set<Dolasci> hss = new HashSet<>();     //
-                                            hss.addAll(listaNovihDolazaka);         //ukloni duplikate
-                                            listaNovihDolazaka.clear();             //
-                                            listaNovihDolazaka.addAll(hss);         //
-                                            if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) { //provjera dal se vec upisao
-                                                    dolasci.idKolegija = k.idKolegija;
-                                                    dolasci.idStudenta = osoba.oib;
-                                                    dolasci.datum = datumDolaskaStudenta;
-                                                    Set<Dolasci> hs = new HashSet<>();
-                                                    hs.addAll(listaNovihDolazaka);      //ukloni duplikate
-                                                    listaNovihDolazaka.clear();         //ukloni duplikate
-                                                    listaNovihDolazaka.addAll(hs);
-                                                    listaNovihDolazaka.add(dolasci);
-                                                    Gson gson = new Gson();     //za spremanje dolazaka
-                                                    String jsonDolaska = gson.toJson(listaNovihDolazaka);
-                                                    PreferenceManagerHelper.spremiDolaske(jsonDolaska, context); //spremi dolaske
-                                                    Toast.makeText(context, "Dolazak je uspijesno prijavljen.", Toast.LENGTH_SHORT).show();
-                                                    statusDolaska = false;
-                                                    break;
-                                                } else statusDolaska = true;
-                                        }
+                                        listaNovihDolazaka.addAll(listaStarihDolazaka); //prepisemo dosadanje dolaske studenta
+                                        Set<Dolasci> hss = new HashSet<>();     //
+                                        hss.addAll(listaNovihDolazaka);         //ukloni duplikate
+                                        listaNovihDolazaka.clear();             //
+                                        listaNovihDolazaka.addAll(hss);         //
+                                        if (k.sifraDolaska.equals(edTxtKodDolaska.getText().toString()) && k.datum.equals(datumDolaskaStudenta)) { //provjera dal se vec upisao
+                                            dolasci.idKolegija = k.idKolegija;
+                                            dolasci.idStudenta = osoba.oib;
+                                            dolasci.datum = datumDolaskaStudenta;
+                                            Set<Dolasci> hs = new HashSet<>();
+                                            hs.addAll(listaNovihDolazaka);      //ukloni duplikate
+                                            listaNovihDolazaka.clear();         //ukloni duplikate
+                                            listaNovihDolazaka.addAll(hs);
+                                            listaNovihDolazaka.add(dolasci);
+                                            Gson gson2 = new Gson();     //za spremanje dolazaka
+                                            String jsonDolaska = gson2.toJson(listaNovihDolazaka);
+                                            PreferenceManagerHelper.spremiDolaske(jsonDolaska, context); //spremi dolaske
+                                            Toast.makeText(context, "Dolazak je uspijesno prijavljen.", Toast.LENGTH_SHORT).show();
+                                            statusDolaska = false;
+                                            break;
+                                        } else statusDolaska = true;
                                     }
                                 }
+                            }
                             if(statusDolaska) Toast.makeText(context, "Pogresni podaci!", Toast.LENGTH_SHORT).show();
-                        }
-                    }, context);
+                        } //modularno - metoda za dohvacanje sifri ovisno o unosu
+                    }, activity, context);
                 }
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if(result.getContents()==null){
-                Toast.makeText(this, "Prekinuli ste skeniranje.", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                edTxtKodDolaska.setText(result.getContents());
-            }
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
 
