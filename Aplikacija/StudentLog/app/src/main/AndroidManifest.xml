@@ -35,6 +35,10 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".PregledDolazaka"
             android:screenOrientation="portrait"></activity>
+        <activity android:name="dohvacanjePodataka.dohvacanjeQRSifri"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".citanjeKoda"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

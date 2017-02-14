@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
@@ -170,6 +171,7 @@ public class PrijavaDolaska extends AppCompatActivity{
             }
         });
     }
+
 
 
     @Override
