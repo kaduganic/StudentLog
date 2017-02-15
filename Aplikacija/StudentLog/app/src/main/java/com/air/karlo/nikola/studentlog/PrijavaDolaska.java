@@ -106,9 +106,7 @@ public class PrijavaDolaska extends AppCompatActivity{
                             List<Kod> kodovi = gson.fromJson(PreferenceManagerHelper.getGeneriraniKod(context), type);
                             List<Kod> listaSvihKodova = new ArrayList<Kod>();
                             for (Kod k: kodovi) {
-                            if(k.qrImage != null){
                             listaSvihKodova.add(k);
-                            }
                             }
                             int day = datum.getDayOfMonth();        //dohvati datum
                             int month = datum.getMonth();
